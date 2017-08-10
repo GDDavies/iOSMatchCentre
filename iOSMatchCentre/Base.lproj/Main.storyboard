@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="29"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <segments>
-                                    <segment title="First"/>
+                                    <segment title="Match Commentary"/>
                                     <segment title="Second"/>
                                 </segments>
                                 <connections>
@@ -124,10 +124,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="peP-zs-Li4">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="top" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="peP-zs-Li4">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -149,6 +149,9 @@
                             <constraint firstAttribute="bottom" secondItem="XZx-UE-XSD" secondAttribute="bottom" id="zi3-FP-j43"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="XZx-UE-XSD" id="cOK-k0-0ow"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujb-mq-sdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
