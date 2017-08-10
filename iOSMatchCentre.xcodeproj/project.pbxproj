@@ -14,6 +14,7 @@
 		9313BD5E1F3CE70F00CCD341 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9313BD5C1F3CE70F00CCD341 /* LaunchScreen.storyboard */; };
 		9313BD691F3CE70F00CCD341 /* iOSMatchCentreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9313BD681F3CE70F00CCD341 /* iOSMatchCentreTests.swift */; };
 		9313BD741F3CE70F00CCD341 /* iOSMatchCentreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9313BD731F3CE70F00CCD341 /* iOSMatchCentreUITests.swift */; };
+		9313BD841F3D0F2900CCD341 /* CommentaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		9313BD6F1F3CE70F00CCD341 /* iOSMatchCentreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSMatchCentreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9313BD731F3CE70F00CCD341 /* iOSMatchCentreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSMatchCentreUITests.swift; sourceTree = "<group>"; };
 		9313BD751F3CE70F00CCD341 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				9313BD531F3CE70F00CCD341 /* AppDelegate.swift */,
 				9313BD551F3CE70F00CCD341 /* ViewController.swift */,
+				9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */,
 				9313BD571F3CE70F00CCD341 /* Main.storyboard */,
 				9313BD5A1F3CE70F00CCD341 /* Assets.xcassets */,
 				9313BD5C1F3CE70F00CCD341 /* LaunchScreen.storyboard */,
@@ -264,6 +267,7 @@
 			files = (
 				9313BD561F3CE70F00CCD341 /* ViewController.swift in Sources */,
 				9313BD541F3CE70F00CCD341 /* AppDelegate.swift in Sources */,
+				9313BD841F3D0F2900CCD341 /* CommentaryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

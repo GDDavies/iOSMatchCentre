@@ -10,6 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var containerViewA: UIView!
+    @IBOutlet weak var containerViewB: UIView!
+    
+    @IBAction func segmentedController(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.containerViewA.alpha = 0
+                self.containerViewB.alpha = 1
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.containerViewA.alpha = 1
+                self.containerViewB.alpha = 0
+            })
+        }
+    }
+    
     var eventTypes = [String]()
     var eventTimes = [String]()
     var eventHeadings = [String]()
@@ -35,16 +52,12 @@ class ViewController: UIViewController {
             })
         })
         task.resume()
-
     }
 
     func populateData(_ matchCommentaryData: Data) {
         
         do {
             let json = try JSONSerialization.jsonObject(with: matchCommentaryData, options: []) as! NSArray
-            
-            print(json[0])
-            print(json.count)
             
             for i in 0..<json.count {
                 if let matchEvent = json[i] as? NSDictionary {
@@ -60,7 +73,5 @@ class ViewController: UIViewController {
             print("Error fetching data")
         }
     }
-
-
 }
 
