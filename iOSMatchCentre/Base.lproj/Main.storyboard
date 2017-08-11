@@ -215,12 +215,56 @@
                                     <constraint firstAttribute="trailing" secondItem="Woy-l2-yaU" secondAttribute="trailing" constant="24" id="y6v-ds-eMX"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="juY-A7-QL9">
+                                <rect key="frame" x="0.0" y="136.5" width="375" height="29"/>
+                                <segments>
+                                    <segment title="Match Stats"/>
+                                    <segment title="Line Ups"/>
+                                    <segment title="Match Events"/>
+                                </segments>
+                                <connections>
+                                    <action selector="matchStatsSegmentedControl:" destination="MH3-A7-EWO" eventType="valueChanged" id="irb-4f-6rA"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIa-Z9-z1D">
+                                <rect key="frame" x="0.0" y="167" width="375" height="392"/>
+                                <connections>
+                                    <segue destination="B5U-su-5fU" kind="embed" id="0kV-XO-w77"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUM-id-DVm">
+                                <rect key="frame" x="0.0" y="167" width="375" height="392"/>
+                                <connections>
+                                    <segue destination="GTx-42-SBX" kind="embed" id="tYi-of-fBN"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdX-20-aDZ">
+                                <rect key="frame" x="0.0" y="167" width="375" height="392"/>
+                                <connections>
+                                    <segue destination="aw3-zt-jug" kind="embed" id="8h9-Yz-zmB"/>
+                                </connections>
+                            </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Ns6-CP-Uy1" firstAttribute="height" secondItem="lCt-iz-5mp" secondAttribute="height" multiplier="0.23" id="50S-vc-B5t"/>
+                            <constraint firstItem="OUM-id-DVm" firstAttribute="leading" secondItem="lCt-iz-5mp" secondAttribute="leading" id="8To-5h-cKP"/>
+                            <constraint firstItem="OUM-id-DVm" firstAttribute="top" secondItem="juY-A7-QL9" secondAttribute="bottom" constant="2" id="CjJ-u3-UXG"/>
+                            <constraint firstAttribute="trailing" secondItem="zdX-20-aDZ" secondAttribute="trailing" id="Erc-57-hjQ"/>
+                            <constraint firstItem="juY-A7-QL9" firstAttribute="top" secondItem="Ns6-CP-Uy1" secondAttribute="bottom" id="GC4-dQ-Okz"/>
+                            <constraint firstItem="zdX-20-aDZ" firstAttribute="leading" secondItem="lCt-iz-5mp" secondAttribute="leading" id="JWV-of-W8A"/>
                             <constraint firstItem="Ns6-CP-Uy1" firstAttribute="width" secondItem="lCt-iz-5mp" secondAttribute="width" id="LeQ-sa-Wes"/>
+                            <constraint firstAttribute="trailing" secondItem="juY-A7-QL9" secondAttribute="trailing" id="Med-cd-I3r"/>
+                            <constraint firstItem="MEG-Yo-Kl1" firstAttribute="top" secondItem="zdX-20-aDZ" secondAttribute="bottom" id="QFK-Ss-ozB"/>
+                            <constraint firstItem="gIa-Z9-z1D" firstAttribute="top" secondItem="juY-A7-QL9" secondAttribute="bottom" constant="2" id="QSl-mR-5Df"/>
+                            <constraint firstItem="zdX-20-aDZ" firstAttribute="top" secondItem="juY-A7-QL9" secondAttribute="bottom" constant="2" id="Vmq-TJ-noh"/>
+                            <constraint firstItem="MEG-Yo-Kl1" firstAttribute="top" secondItem="OUM-id-DVm" secondAttribute="bottom" id="bfE-CL-eCn"/>
+                            <constraint firstItem="juY-A7-QL9" firstAttribute="leading" secondItem="lCt-iz-5mp" secondAttribute="leading" id="cvd-iM-eSd"/>
+                            <constraint firstItem="MEG-Yo-Kl1" firstAttribute="top" secondItem="gIa-Z9-z1D" secondAttribute="bottom" id="jR8-96-Wsu"/>
                             <constraint firstItem="Ns6-CP-Uy1" firstAttribute="centerX" secondItem="lCt-iz-5mp" secondAttribute="centerX" id="mV8-rY-ggd"/>
+                            <constraint firstItem="gIa-Z9-z1D" firstAttribute="leading" secondItem="lCt-iz-5mp" secondAttribute="leading" id="ods-ju-06Q"/>
+                            <constraint firstAttribute="trailing" secondItem="OUM-id-DVm" secondAttribute="trailing" id="rTJ-AF-JBi"/>
+                            <constraint firstAttribute="trailing" secondItem="gIa-Z9-z1D" secondAttribute="trailing" id="u5b-lB-Zen"/>
                             <constraint firstItem="Ns6-CP-Uy1" firstAttribute="top" secondItem="seH-EW-xQG" secondAttribute="bottom" constant="8" id="w7Z-3W-JXp"/>
                         </constraints>
                     </view>
@@ -230,6 +274,9 @@
                         <outlet property="awayTeamName" destination="UBF-HB-Kxd" id="Zrv-re-K1m"/>
                         <outlet property="awayTeamScore" destination="L5Z-yr-OH7" id="gay-gK-Ba5"/>
                         <outlet property="competitionNameLabel" destination="yNg-nF-Bhr" id="46C-ID-P98"/>
+                        <outlet property="containerViewA" destination="gIa-Z9-z1D" id="jad-MC-9kS"/>
+                        <outlet property="containerViewB" destination="OUM-id-DVm" id="HkK-mk-S0A"/>
+                        <outlet property="containerViewC" destination="zdX-20-aDZ" id="fKj-gf-7nb"/>
                         <outlet property="homeTeamLogo" destination="syl-7P-3UQ" id="ixd-a0-FND"/>
                         <outlet property="homeTeamName" destination="aPg-br-934" id="lQu-Ac-HtZ"/>
                         <outlet property="homeTeamScore" destination="51w-eQ-haH" id="d4g-mK-NHd"/>
@@ -304,6 +351,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujb-mq-sdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1904.8" y="-108.39580209895054"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2O1-uF-tmA">
+            <objects>
+                <viewController id="B5U-su-5fU" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QwU-rY-lDz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LWW-ag-jd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2698" y="144"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Utc-wD-Q5A">
+            <objects>
+                <viewController id="GTx-42-SBX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V34-14-Hcc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Kb-xT-tsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2697" y="1046"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Xq2-K0-DvQ">
+            <objects>
+                <viewController id="aw3-zt-jug" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5ty-HK-32F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yBF-fb-U5J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2697" y="593"/>
         </scene>
     </scenes>
     <resources>

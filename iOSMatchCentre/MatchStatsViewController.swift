@@ -23,10 +23,24 @@ class MatchStatsViewController: UIViewController {
     @IBOutlet weak var attendanceLabel: UILabel!
     @IBOutlet weak var refereeLabel: UILabel!
     
+    @IBOutlet weak var containerViewA: UIView!
+    @IBOutlet weak var containerViewB: UIView!
+    @IBOutlet weak var containerViewC: UIView!
+    
+    @IBAction func matchStatsSegmentedControl(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            self.view.addSubview(containerViewA)
+        } else if sender.selectedSegmentIndex == 1 {
+            self.view.addSubview(containerViewB)
+        } else {
+            self.view.addSubview(containerViewC)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         getMatchStatsData()
+        self.view.addSubview(containerViewA)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,12 +50,14 @@ class MatchStatsViewController: UIViewController {
     
     // MARK: - Setup Match Stats Data
     
+    // Retreive all match stats data from JSON feed
     func getMatchStatsData() {
         let url = URL(string: "https://feeds.tribehive.co.uk/DigitalStadiumServer/opta?pageType=match&value=803294&v=5")
         
         let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             DispatchQueue.main.async(execute: {
                 if let unwrappedData = data {
+                    // If successful pass data object to populate function
                     self.populateMatchStatsData(unwrappedData)
                 } else {
                     // Error popup
@@ -54,7 +70,7 @@ class MatchStatsViewController: UIViewController {
     
     func populateMatchStatsData(_ matchStatsData: Data) {
         do {
-            // Retrieve dictionary
+            // Create diciotnary from JSON data object
             let json = try JSONSerialization.jsonObject(with: matchStatsData, options: []) as! NSDictionary
             
             if let competitionName = json["competition"] {
