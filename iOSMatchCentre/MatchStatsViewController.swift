@@ -64,7 +64,10 @@ class MatchStatsViewController: UIViewController {
                 venueLabel.text = String(describing: venueName)
             }
             if let attendanceSize = json["attendance"] {
-                attendanceLabel.text = "Attendance: " + String(describing: attendanceSize)
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = NumberFormatter.Style.decimal
+                let formattedAttendance = numberFormatter.string(from: NSNumber(value:attendanceSize as! Int))
+                attendanceLabel.text = "Attendance: \(formattedAttendance!)"
             }
             if let refereeName = json["referee"] {
                 refereeLabel.text = "Ref: " + String(describing: refereeName)
