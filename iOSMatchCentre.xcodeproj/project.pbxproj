@@ -16,6 +16,7 @@
 		9313BD741F3CE70F00CCD341 /* iOSMatchCentreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9313BD731F3CE70F00CCD341 /* iOSMatchCentreUITests.swift */; };
 		9313BD841F3D0F2900CCD341 /* CommentaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */; };
 		93308AFC1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */; };
+		93308AFE1F3DCE61004C2A38 /* MatchStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93308AFD1F3DCE61004C2A38 /* MatchStatsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		9313BD751F3CE70F00CCD341 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryViewController.swift; sourceTree = "<group>"; };
 		93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryTableViewCell.swift; sourceTree = "<group>"; };
+		93308AFD1F3DCE61004C2A38 /* MatchStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchStatsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +105,8 @@
 			children = (
 				9313BD531F3CE70F00CCD341 /* AppDelegate.swift */,
 				9313BD551F3CE70F00CCD341 /* ViewController.swift */,
-				9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */,
-				93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */,
+				93308AFF1F3DCE6C004C2A38 /* Commentary */,
+				93308B001F3DCE7D004C2A38 /* Match Stats */,
 				9313BD571F3CE70F00CCD341 /* Main.storyboard */,
 				9313BD5A1F3CE70F00CCD341 /* Assets.xcassets */,
 				9313BD5C1F3CE70F00CCD341 /* LaunchScreen.storyboard */,
@@ -129,6 +131,23 @@
 				9313BD751F3CE70F00CCD341 /* Info.plist */,
 			);
 			path = iOSMatchCentreUITests;
+			sourceTree = "<group>";
+		};
+		93308AFF1F3DCE6C004C2A38 /* Commentary */ = {
+			isa = PBXGroup;
+			children = (
+				9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */,
+				93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */,
+			);
+			name = Commentary;
+			sourceTree = "<group>";
+		};
+		93308B001F3DCE7D004C2A38 /* Match Stats */ = {
+			isa = PBXGroup;
+			children = (
+				93308AFD1F3DCE61004C2A38 /* MatchStatsViewController.swift */,
+			);
+			name = "Match Stats";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9313BD561F3CE70F00CCD341 /* ViewController.swift in Sources */,
+				93308AFE1F3DCE61004C2A38 /* MatchStatsViewController.swift in Sources */,
 				9313BD541F3CE70F00CCD341 /* AppDelegate.swift in Sources */,
 				93308AFC1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift in Sources */,
 				9313BD841F3D0F2900CCD341 /* CommentaryViewController.swift in Sources */,
