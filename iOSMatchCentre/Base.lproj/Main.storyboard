@@ -25,8 +25,8 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="29"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <segments>
+                                    <segment title="Match Details"/>
                                     <segment title="Match Commentary"/>
-                                    <segment title="Second"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentedController:" destination="BYZ-38-t0r" eventType="valueChanged" id="QP3-7w-d8y"/>
@@ -95,7 +95,11 @@
         <scene sceneID="Bdb-GD-y5v">
             <objects>
                 <viewController id="MH3-A7-EWO" sceneMemberID="viewController">
-                    <view key="view" alpha="0.0" contentMode="scaleToFill" id="lCt-iz-5mp">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="seH-EW-xQG"/>
+                        <viewControllerLayoutGuide type="bottom" id="MEG-Yo-Kl1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lCt-iz-5mp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -103,36 +107,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dxx-90-oNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1905" y="441"/>
+            <point key="canvasLocation" x="1905" y="457"/>
         </scene>
         <!--Commentary View Controller-->
         <scene sceneID="j40-G3-ulQ">
             <objects>
                 <viewController id="xOb-UB-i64" customClass="CommentaryViewController" customModule="iOSMatchCentre" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="swe-Bq-HzI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hni-qh-7DF"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Kj9-f8-Lr3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XZx-UE-XSD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XZx-UE-XSD">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentaryCell" textLabel="peP-zs-Li4" style="IBUITableViewCellStyleDefault" id="nnj-kL-Dp9">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentaryCell" id="nnj-kL-Dp9" customClass="CommentaryTableViewCell" customModule="iOSMatchCentre" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nnj-kL-Dp9" id="Ul7-rC-21U">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="top" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="peP-zs-Li4">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieY-Dq-WdJ">
+                                                    <rect key="frame" x="8" y="8" width="359" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="ieY-Dq-WdJ" secondAttribute="bottom" constant="8" id="JS2-rs-piE"/>
+                                                <constraint firstItem="ieY-Dq-WdJ" firstAttribute="top" secondItem="Ul7-rC-21U" secondAttribute="top" constant="8" id="Ruo-pe-gSB"/>
+                                                <constraint firstItem="ieY-Dq-WdJ" firstAttribute="leading" secondItem="Ul7-rC-21U" secondAttribute="leading" constant="8" id="TDe-Ey-Wzw"/>
+                                                <constraint firstAttribute="trailing" secondItem="ieY-Dq-WdJ" secondAttribute="trailing" constant="8" id="icU-DV-9Q2"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentaryLabel" destination="ieY-Dq-WdJ" id="X5X-Uv-YE7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

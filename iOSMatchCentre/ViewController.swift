@@ -16,13 +16,11 @@ class ViewController: UIViewController {
     @IBAction func segmentedController(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             UIView.animate(withDuration: 0.5, animations: {
-                self.containerViewA.alpha = 0
-                self.containerViewB.alpha = 1
+                self.bringContainerViewAToFront()
             })
         } else {
             UIView.animate(withDuration: 0.5, animations: {
-                self.containerViewA.alpha = 1
-                self.containerViewB.alpha = 0
+                self.bringContainerViewBToFront()
             })
         }
     }
@@ -30,11 +28,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.bringContainerViewAToFront()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func bringContainerViewAToFront() {
+        self.containerViewA.alpha = 1
+        self.containerViewB.alpha = 0
+    }
+    
+    func bringContainerViewBToFront() {
+        self.containerViewB.alpha = 1
+        self.containerViewA.alpha = 0
     }
 }
 

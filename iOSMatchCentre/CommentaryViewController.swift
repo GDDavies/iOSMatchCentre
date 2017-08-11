@@ -21,6 +21,8 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         getData()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 200
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,24 +35,25 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
         
         let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             DispatchQueue.main.async(execute: {
-                self.populateData(data!)
+                if let unwrappedData = data {
+                    self.populateData(unwrappedData)
+                } else {
+                    // Error popup
+                    print("Unable to retrieve data")
+                }
             })
         })
         task.resume()
     }
     
     func populateData(_ matchCommentaryData: Data) {
-        
         do {
+            // Retrieve array of dictionaries
             let json = try JSONSerialization.jsonObject(with: matchCommentaryData, options: []) as! NSArray
             
+            // Loop through array and assign each value to array
             for i in 0..<json.count {
                 if let matchEvent = json[i] as? NSDictionary {
-                    print(matchEvent["type"] as! String)
-                    print(matchEvent["time"] as! String)
-                    print(matchEvent["heading"] as! String)
-                    print(matchEvent["description"] as! String)
-                    
                     eventTypes.append(matchEvent["type"] as! String)
                     eventTimes.append(matchEvent["time"] as! String)
                     eventHeadings.append(matchEvent["heading"] as! String)
@@ -71,16 +74,37 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
     // MARK: - TableView Methods
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return eventDescriptions.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1 //eventDescriptions.count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentaryCell", for: indexPath)
-        cell.textLabel?.text = eventTimes[indexPath.row] + " " + eventDescriptions[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentaryCell", for: indexPath) as! CommentaryTableViewCell
+        cell.commentaryLabel?.text = eventDescriptions[indexPath.section]
+        //cell.layoutMargins.top = 10.0
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return eventTimes[section]
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if eventTimes[section] == "" {
+            return 8.0
+        } else {
+            return 20.0
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
+//    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 1.0
+//    }
 }
