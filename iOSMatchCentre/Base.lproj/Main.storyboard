@@ -159,11 +159,39 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Competition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNg-nF-Bhr">
+                                        <rect key="frame" x="140" y="73" width="94" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Venue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fbn-MN-LDB">
+                                        <rect key="frame" x="37" y="138" width="48" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Attendance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ClM-vS-rUe">
+                                        <rect key="frame" x="143" y="138" width="88" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Referee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkJ-nF-KeF">
+                                        <rect key="frame" x="285" y="138" width="59" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="aPg-br-934" firstAttribute="centerX" secondItem="syl-7P-3UQ" secondAttribute="centerX" id="2S4-2f-R36"/>
                                     <constraint firstItem="UBF-HB-Kxd" firstAttribute="centerX" secondItem="Woy-l2-yaU" secondAttribute="centerX" id="8Hr-vx-rik"/>
+                                    <constraint firstItem="yNg-nF-Bhr" firstAttribute="centerY" secondItem="7HD-yk-33w" secondAttribute="centerY" id="D9A-Nh-c1X"/>
                                     <constraint firstItem="Woy-l2-yaU" firstAttribute="leading" secondItem="L5Z-yr-OH7" secondAttribute="trailing" constant="17" id="DRm-Kr-ELZ"/>
                                     <constraint firstItem="UBF-HB-Kxd" firstAttribute="top" secondItem="Woy-l2-yaU" secondAttribute="bottom" constant="8" id="El7-St-Yez"/>
                                     <constraint firstItem="7HD-yk-33w" firstAttribute="centerX" secondItem="Ns6-CP-Uy1" secondAttribute="centerX" id="Gw0-4C-LRl"/>
@@ -171,6 +199,7 @@
                                     <constraint firstItem="UBF-HB-Kxd" firstAttribute="width" secondItem="Woy-l2-yaU" secondAttribute="width" id="QQZ-98-cL4"/>
                                     <constraint firstItem="Woy-l2-yaU" firstAttribute="top" secondItem="Ns6-CP-Uy1" secondAttribute="top" id="WEk-56-ICM"/>
                                     <constraint firstItem="7HD-yk-33w" firstAttribute="centerY" secondItem="51w-eQ-haH" secondAttribute="centerY" id="Wkp-fV-E4H"/>
+                                    <constraint firstItem="yNg-nF-Bhr" firstAttribute="top" secondItem="7HD-yk-33w" secondAttribute="bottom" constant="14.5" id="XVb-5m-LKC"/>
                                     <constraint firstItem="syl-7P-3UQ" firstAttribute="top" secondItem="Ns6-CP-Uy1" secondAttribute="top" id="aiU-gJ-DD2"/>
                                     <constraint firstItem="aPg-br-934" firstAttribute="top" secondItem="syl-7P-3UQ" secondAttribute="bottom" constant="8" id="krL-ot-9hX"/>
                                     <constraint firstItem="syl-7P-3UQ" firstAttribute="leading" secondItem="Ns6-CP-Uy1" secondAttribute="leading" constant="24" id="qmD-wy-HVs"/>
