@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var containerViewA: UIView!
     @IBOutlet weak var containerViewB: UIView!
+    @IBOutlet weak var segmentController: UISegmentedControl!
     
     @IBAction func segmentedController(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
@@ -29,6 +30,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.bringContainerViewAToFront()
+        
+        navigationController?.navigationBar.barTintColor = Theme.primaryTeamColour
+        //self.automaticallyAdjustsScrollViewInsets = false
+        //navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Theme.secondaryTeamColour]
+        segmentController.tintColor = Theme.primaryTeamColour
     }
 
     override func didReceiveMemoryWarning() {

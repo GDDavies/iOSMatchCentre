@@ -56,7 +56,6 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             if let homeTeamStats = json["homeStats"] as? NSDictionary {
                 
                 for (key, value) in homeTeamStats {
-                    //homeTeamStatsArray.append(value as! Double)
                     
                     switch key as! String {
                     case "halfTimeScore":
@@ -78,15 +77,12 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
                     default:
                         print("error")
                     }
-                    
-                    print("\(key) \(value)")
                 }
             }
             
             if let awayTeamStats = json["awayStats"] as? NSDictionary {
                 
                 for (key, value) in awayTeamStats {
-                    //homeTeamStatsArray.append(value as! Double)
                     
                     switch key as! String {
                     case "halfTimeScore":
@@ -113,8 +109,6 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             
             // Reload view once all JSON data is loaded
             matchStatsTableView.reloadData()
-            print("Table reloaded")
-            print(homeTeamStatsArray.count)
         } catch {
             // Error popup
             print("Error fetching data")
@@ -161,7 +155,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MatchStatsCell", for: indexPath) as! MatchStatsTableViewCell
         
-        print(homeStatsWidthArray)
+        cell.awayStatsView.backgroundColor = Theme.primaryTeamColour
         
         if homeTeamStatsArray[1] != 0.0 {
             
@@ -172,17 +166,21 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         
             homeStatsShapeLayer.frame = CGRect(x: awayStatsBounds.origin.x, y: awayStatsBounds.origin.y, width: awayStatsBounds.width * homeStatsWidthArray[indexPath.section], height: awayStatsBounds.height)
             
-            cell.homeStatLabel.text = String(homeTeamStatsArray[indexPath.section])
-            cell.awayStatLabel.text = String(awayTeamStatsArray[indexPath.section])
+            let formatter = NumberFormatter()
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 0
             
-            homeStatsShapeLayer.fillColor = UIColor.blue.cgColor
+            cell.homeStatLabel.text = formatter.string(from: NSNumber(value: homeTeamStatsArray[indexPath.section]))
+            cell.awayStatLabel.text = formatter.string(from: NSNumber(value: awayTeamStatsArray[indexPath.section]))
+            
+            homeStatsShapeLayer.fillColor = UIColor.red.cgColor
             homeStatsShapeLayer.path = UIBezierPath(rect: homeStatsShapeLayer.bounds).cgPath
             
             // Remove away stats view sublayer if present
-            if cell.awayStatsView.layer.sublayers?.count == 3 {
-                cell.awayStatsView.layer.sublayers!.remove(at: 1)
+            if cell.awayStatsView.layer.sublayers?.count == 1 {
+                cell.awayStatsView.layer.sublayers!.remove(at: 0)
             }
-            cell.awayStatsView.layer.insertSublayer(homeStatsShapeLayer, at: 1)
+            cell.awayStatsView.layer.insertSublayer(homeStatsShapeLayer, at: 0)
         }
         return cell
     }
@@ -205,7 +203,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             y = 8
         }
         
-        let label = UILabel(frame: CGRect(x: -15, y: y, width: Int(self.view.frame.width), height: 20))
+        let label = UILabel(frame: CGRect(x: 0, y: y, width: Int(self.view.frame.width), height: 20))
         label.text = sectionHeaders[section]
         label.font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightBold)
         label.textAlignment = .center

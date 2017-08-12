@@ -29,6 +29,8 @@ class MatchStatsViewController: UIViewController {
     
     var homeTeamStatsDict = [String : Any]()
     
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
     @IBAction func matchStatsSegmentedControl(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             self.view.addSubview(containerViewA)
@@ -123,29 +125,6 @@ class MatchStatsViewController: UIViewController {
                 }
             }
             
-            
-//            if let standings = json["standings"] as? NSDictionary {
-//                if let resultsArray = standings["results"] as? NSArray {
-//                    for i in 0..<resultsArray.count {
-//                        if let teamData = resultsArray[i] as? NSDictionary {
-//                            let teamName = teamData["entry_name"]
-//                            let rank = teamData["rank"]
-//                            let teamPoints = teamData["total"]
-//                            
-//                            names.add(teamName!)
-//                            ranks.add(rank!)
-//                            points.add(teamPoints!)
-//                        }
-//                    }
-//                }
-//            }
-//            
-//            // Loop through array and assign each value to array
-//            for i in 0..<json.count {
-//                if let matchEvent = json[i] as? NSDictionary {
-//
-//                }
-//            }
             // Reload view once all JSON data is loaded
             //tableView.reloadData()
         } catch {
@@ -158,11 +137,11 @@ class MatchStatsViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowMatchStatsBars" {
-            if let vc = segue.destination as? MatchStatsTableViewController {
-                //vc.homeTeamStats = homeTeamStatsDict
-            }
-        }
+//        if segue.identifier == "ShowMatchStatsBars" {
+//            if let vc = segue.destination as? MatchStatsTableViewController {
+//                //vc.homeTeamStats = homeTeamStatsDict
+//            }
+//        }
     }
 
 }
