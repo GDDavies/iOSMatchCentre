@@ -32,10 +32,9 @@ class ViewController: UIViewController {
         self.bringContainerViewAToFront()
         
         navigationController?.navigationBar.barTintColor = Theme.primaryTeamColour
-        //self.automaticallyAdjustsScrollViewInsets = false
-        //navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Theme.secondaryTeamColour]
-        segmentController.tintColor = Theme.primaryTeamColour
+        segmentController.tintColor = Theme.secondaryTeamColour
+        segmentController.backgroundColor = Theme.primaryTeamColour
     }
 
     override func didReceiveMemoryWarning() {
