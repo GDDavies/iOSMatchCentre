@@ -27,6 +27,8 @@ class MatchStatsViewController: UIViewController {
     @IBOutlet weak var containerViewB: UIView!
     @IBOutlet weak var containerViewC: UIView!
     
+    var homeTeamStatsDict = [String : Any]()
+    
     @IBAction func matchStatsSegmentedControl(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             self.view.addSubview(containerViewA)
@@ -105,9 +107,13 @@ class MatchStatsViewController: UIViewController {
             
             if let homeTeamStats = json["homeStats"] as? NSDictionary {
                 
+                homeTeamStatsDict = homeTeamStats as! [String : Any]
+                
                 if let homeTeamScoreText = homeTeamStats["score"] {
                     homeTeamScore.text = String(describing: homeTeamScoreText)
                 }
+                
+                //performSegue(withIdentifier: "ShowMatchStatsBars", sender: Any?.self)
             }
             
             if let awayTeamStats = json["awayStats"] as? NSDictionary {
@@ -148,14 +154,15 @@ class MatchStatsViewController: UIViewController {
         }
     }
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowMatchStatsBars" {
+            if let vc = segue.destination as? MatchStatsTableViewController {
+                //vc.homeTeamStats = homeTeamStatsDict
+            }
+        }
     }
-    */
 
 }

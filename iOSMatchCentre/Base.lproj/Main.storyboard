@@ -229,7 +229,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIa-Z9-z1D">
                                 <rect key="frame" x="0.0" y="167" width="375" height="392"/>
                                 <connections>
-                                    <segue destination="B5U-su-5fU" kind="embed" id="0kV-XO-w77"/>
+                                    <segue destination="B5U-su-5fU" kind="embed" identifier="ShowMatchStatsBars" id="0kV-XO-w77"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUM-id-DVm">
@@ -352,19 +352,71 @@
             </objects>
             <point key="canvasLocation" x="1904.8" y="-108.39580209895054"/>
         </scene>
-        <!--View Controller-->
+        <!--Match Stats Table View Controller-->
         <scene sceneID="2O1-uF-tmA">
             <objects>
-                <viewController id="B5U-su-5fU" sceneMemberID="viewController">
+                <viewController id="B5U-su-5fU" customClass="MatchStatsTableViewController" customModule="iOSMatchCentre" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QwU-rY-lDz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="fnQ-Kx-RUX">
+                                <rect key="frame" x="16" y="0.0" width="343" height="392.5"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MatchStatsCell" id="ODl-30-KTb" customClass="MatchStatsTableViewCell" customModule="iOSMatchCentre" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ODl-30-KTb" id="YFH-rt-uZg">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y17-Qe-sc1">
+                                                    <rect key="frame" x="0.0" y="8" width="176" height="27"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Awg-tv-WK3">
+                                                    <rect key="frame" x="176" y="8" width="167" height="27"/>
+                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Y17-Qe-sc1" firstAttribute="leading" secondItem="YFH-rt-uZg" secondAttribute="leading" id="0Vw-gI-bZw"/>
+                                                <constraint firstItem="Y17-Qe-sc1" firstAttribute="top" secondItem="YFH-rt-uZg" secondAttribute="top" constant="8" id="ClE-aV-Mrm"/>
+                                                <constraint firstItem="Awg-tv-WK3" firstAttribute="top" secondItem="YFH-rt-uZg" secondAttribute="top" constant="8" id="E4F-JQ-Ks5"/>
+                                                <constraint firstAttribute="trailing" secondItem="Awg-tv-WK3" secondAttribute="trailing" id="TRE-6Q-47e"/>
+                                                <constraint firstAttribute="bottom" secondItem="Awg-tv-WK3" secondAttribute="bottom" constant="8" id="hVL-MZ-mzl"/>
+                                                <constraint firstAttribute="bottom" secondItem="Y17-Qe-sc1" secondAttribute="bottom" constant="8" id="suv-qu-sRL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="awayPosessionView" destination="Awg-tv-WK3" id="YZr-is-RmE"/>
+                                            <outlet property="homePosessionView" destination="Y17-Qe-sc1" id="cpf-Fl-uaY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="B5U-su-5fU" id="uvO-b0-bfv"/>
+                                    <outlet property="delegate" destination="B5U-su-5fU" id="zgY-Es-0zy"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="fnQ-Kx-RUX" firstAttribute="top" secondItem="QwU-rY-lDz" secondAttribute="top" id="7T8-jm-RGI"/>
+                            <constraint firstAttribute="bottom" secondItem="fnQ-Kx-RUX" secondAttribute="bottom" id="W9C-Wh-Ygo"/>
+                            <constraint firstAttribute="trailing" secondItem="fnQ-Kx-RUX" secondAttribute="trailing" constant="16" id="xDU-kQ-zq6"/>
+                            <constraint firstItem="fnQ-Kx-RUX" firstAttribute="leading" secondItem="QwU-rY-lDz" secondAttribute="leading" constant="16" id="z5k-ma-iaQ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="matchStatsTableView" destination="fnQ-Kx-RUX" id="ZO9-4G-LSu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWW-ag-jd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2698" y="144"/>
+            <point key="canvasLocation" x="2696.8000000000002" y="143.02848575712144"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Utc-wD-Q5A">
