@@ -35,8 +35,6 @@ class MatchStatsViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             self.view.addSubview(containerViewA)
         } else if sender.selectedSegmentIndex == 1 {
-            self.view.addSubview(containerViewB)
-        } else {
             self.view.addSubview(containerViewC)
         }
     }
