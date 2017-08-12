@@ -173,7 +173,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             cell.homeStatLabel.text = formatter.string(from: NSNumber(value: homeTeamStatsArray[indexPath.section]))
             cell.awayStatLabel.text = formatter.string(from: NSNumber(value: awayTeamStatsArray[indexPath.section]))
             
-            homeStatsShapeLayer.fillColor = UIColor.red.cgColor
+            homeStatsShapeLayer.fillColor = UIColor(red: 230/255, green: 35/255, blue: 51/255, alpha: 1.0).cgColor
             homeStatsShapeLayer.path = UIBezierPath(rect: homeStatsShapeLayer.bounds).cgPath
             
             // Remove away stats view sublayer if present

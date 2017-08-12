@@ -81,7 +81,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U2P-jv-rId" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="o3y-vL-gsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="o3y-vL-gsK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -383,7 +383,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="PlU-Td-Npa"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -396,7 +396,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="2t7-GN-9sk"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
