@@ -236,7 +236,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdX-20-aDZ">
                                 <rect key="frame" x="0.0" y="169" width="375" height="398"/>
                                 <connections>
-                                    <segue destination="aw3-zt-jug" kind="embed" id="8h9-Yz-zmB"/>
+                                    <segue destination="aw3-zt-jug" kind="embed" identifier="ShowLineUps" id="8h9-Yz-zmB"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -519,6 +519,9 @@
                             <constraint firstItem="4xN-Ny-YsD" firstAttribute="leading" secondItem="5ty-HK-32F" secondAttribute="leading" id="NSh-MS-zWm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lineUpTableView" destination="4xN-Ny-YsD" id="MKx-fB-U1N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBF-fb-U5J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

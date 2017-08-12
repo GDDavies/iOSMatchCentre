@@ -134,12 +134,21 @@ class MatchStatsViewController: UIViewController {
 
     // MARK: - Navigation
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ShowMatchStatsBars" {
-//            if let vc = segue.destination as? MatchStatsTableViewController {
-//                //vc.homeTeamStats = homeTeamStatsDict
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ShowLineUps" {
+//            if let vc = segue.destination as? LineUpsViewController {
+//                vc.test = "Test"
 //            }
 //        }
-    }
+//    }
+    
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        if identifier == "ShowLineUps" {
+//            if homeTeamStatsDict.count > 0 {
+//                return true
+//            }
+//        }
+//        return false
+//    }
 
 }
