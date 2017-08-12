@@ -10,9 +10,9 @@ import UIKit
 
 class MatchStatsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var homePosessionWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var homePosessionView: UIView!
-    @IBOutlet weak var awayPosessionView: UIView!
+    @IBOutlet weak var awayStatsView: UIView!
+    @IBOutlet weak var homeStatLabel: UILabel!
+    @IBOutlet weak var awayStatLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,5 +24,4 @@ class MatchStatsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

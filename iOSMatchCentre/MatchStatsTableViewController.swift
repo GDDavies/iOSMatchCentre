@@ -12,17 +12,16 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
 
     @IBOutlet weak var matchStatsTableView: UITableView!
     
-    let sectionHeaders = ["Half Time Score","Posession","Shots","Shots on Target","Corners","Fouls","Yellow Cards","Red Cards"]
+    let sectionHeaders = ["Half Time Score","Possession","Shots","Shots on Target","Corners","Fouls","Yellow Cards","Red Cards"]
     
-    var homeTeamStatsArray = [Double]()
-    var awayTeamStatsArray = [Double]()
+    var homeTeamStatsArray = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+    var awayTeamStatsArray = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
     
-    var homeWidthConstraint: NSLayoutConstraint?
-    var awayWidthConstraint: NSLayoutConstraint?
-    
+    var homeStatsWidthArray: [CGFloat] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        matchStatsTableView.isHidden = true
         getMatchStatsData()
     }
 
@@ -56,100 +55,94 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             
             if let homeTeamStats = json["homeStats"] as? NSDictionary {
                 
-                for (_, value) in homeTeamStats {
-                    homeTeamStatsArray.append(value as! Double)
+                for (key, value) in homeTeamStats {
+                    //homeTeamStatsArray.append(value as! Double)
+                    
+                    switch key as! String {
+                    case "halfTimeScore":
+                        homeTeamStatsArray[0] = value as! Double
+                    case "possession":
+                        homeTeamStatsArray[1] = value as! Double
+                    case "shots":
+                        homeTeamStatsArray[2] = value as! Double
+                    case "shotsOnTarget":
+                        homeTeamStatsArray[3] = value as! Double
+                    case "corners":
+                        homeTeamStatsArray[4] = value as! Double
+                    case "fouls":
+                        homeTeamStatsArray[5] = value as! Double
+                    case "yellowCards":
+                        homeTeamStatsArray[6] = value as! Double
+                    case "redCards":
+                        homeTeamStatsArray[7] = value as! Double
+                    default:
+                        print("error")
+                    }
+                    
+                    print("\(key) \(value)")
                 }
-                
-//                if let homeTeamStats = homeTeamStats["halfTimeScore"] as? String {
-//                    homeTeamStats
-//
-//                }
-                
-                //performSegue(withIdentifier: "ShowMatchStatsBars", sender: Any?.self)
             }
             
             if let awayTeamStats = json["awayStats"] as? NSDictionary {
                 
-                for (_, value) in awayTeamStats {
-                    awayTeamStatsArray.append(value as! Double)
+                for (key, value) in awayTeamStats {
+                    //homeTeamStatsArray.append(value as! Double)
+                    
+                    switch key as! String {
+                    case "halfTimeScore":
+                        awayTeamStatsArray[0] = value as! Double
+                    case "possession":
+                        awayTeamStatsArray[1] = value as! Double
+                    case "shots":
+                        awayTeamStatsArray[2] = value as! Double
+                    case "shotsOnTarget":
+                        awayTeamStatsArray[3] = value as! Double
+                    case "corners":
+                        awayTeamStatsArray[4] = value as! Double
+                    case "fouls":
+                        awayTeamStatsArray[5] = value as! Double
+                    case "yellowCards":
+                        awayTeamStatsArray[6] = value as! Double
+                    case "redCards":
+                        awayTeamStatsArray[7] = value as! Double
+                    default:
+                        print("error")
+                    }
                 }
-                
-//                if let awayTeamStatsArray = awayTeamStats["halfTimeScore"] as? NSArray {
-//
-//                }
-                
-                //createPercentages(homeInput: homeTeamStatsDict["halfTimeScore"] as! Double, awayInput: awayTeamStats["halfTimeScore"])
             }
-            
-            
-            //            if let standings = json["standings"] as? NSDictionary {
-            //                if let resultsArray = standings["results"] as? NSArray {
-            //                    for i in 0..<resultsArray.count {
-            //                        if let teamData = resultsArray[i] as? NSDictionary {
-            //                            let teamName = teamData["entry_name"]
-            //                            let rank = teamData["rank"]
-            //                            let teamPoints = teamData["total"]
-            //
-            //                            names.add(teamName!)
-            //                            ranks.add(rank!)
-            //                            points.add(teamPoints!)
-            //                        }
-            //                    }
-            //                }
-            //            }
-            //
-            //            // Loop through array and assign each value to array
-            //            for i in 0..<json.count {
-            //                if let matchEvent = json[i] as? NSDictionary {
-            //
-            //                }
-            //            }
             
             // Reload view once all JSON data is loaded
             matchStatsTableView.reloadData()
-            matchStatsTableView.isHidden = false
+            print("Table reloaded")
+            print(homeTeamStatsArray.count)
         } catch {
             // Error popup
             print("Error fetching data")
         }
     }
 
-    
-
     /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     */
     
-    func createPercentages(homeInput: Double, awayInput: Double) -> (home: CGFloat, away: CGFloat) {
-            
-//        if let homeHalfTimeScore = homeTeamStatsDict["halfTimeScore"] {
-//            print(homeHalfTimeScore)
-//        }
+    func createHomePercentage(homeInput: Double, awayInput: Double, index: Int) {
         
-        // BUGS HERE
         let sum = homeInput + awayInput
-        var home: Double?
-        var away: Double?
         
-        if homeInput != 0.0 {
-            home = homeInput / sum
+        if homeInput == 0 && awayInput == 0 {
+            homeStatsWidthArray.remove(at: index)
+            homeStatsWidthArray.insert(CGFloat(0.5), at: index)
+        } else if homeInput == 0 {
+            homeStatsWidthArray.remove(at: index)
+            homeStatsWidthArray.insert(CGFloat(0.0), at: index)
+        } else if awayInput == 0 {
+            homeStatsWidthArray.remove(at: index)
+            homeStatsWidthArray.insert(CGFloat(1.0), at: index)
         } else {
-            home = 0.0
+            homeStatsWidthArray.remove(at: index)
+            homeStatsWidthArray.insert(CGFloat(homeInput / sum), at: index)
         }
-        
-        if awayInput != 0.0 {
-            away = awayInput / sum
-        } else {
-            away = 0.0
-        }
-        
-        return (CGFloat(home!), CGFloat(away!))
     }
     
     // MARK: - TableView methods
@@ -161,32 +154,36 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         return 1
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MatchStatsCell", for: indexPath) as! MatchStatsTableViewCell
         
+        print(homeStatsWidthArray)
         
-        homeWidthConstraint = cell.homePosessionView.widthAnchor.constraint(equalToConstant: matchStatsTableView.frame.width * 0.5)
-        homeWidthConstraint!.isActive = true
-        
-        awayWidthConstraint = cell.awayPosessionView.widthAnchor.constraint(equalToConstant: matchStatsTableView.frame.width * 0.5)
-        awayWidthConstraint!.isActive = true
-        
-        if homeTeamStatsArray.count != 0 && awayTeamStatsArray.count != 0 {
-        let percentages = createPercentages(homeInput: homeTeamStatsArray[indexPath.section], awayInput: awayTeamStatsArray[indexPath.section])
+        if homeTeamStatsArray[1] != 0.0 {
             
-//            if percentages.home > 0 {
-                homeWidthConstraint?.constant = matchStatsTableView.frame.width * percentages.home
-//            } else {
-//                homeWidthConstraint?.constant = matchStatsTableView.frame.width * 0.5
-//            }
+            let homeStatsShapeLayer = CAShapeLayer()
+            let awayStatsBounds = cell.awayStatsView.bounds
             
-//            if percentages.away > 0 {
-                awayWidthConstraint?.constant = matchStatsTableView.frame.width * percentages.away
-//            } else {
-//                awayWidthConstraint?.constant = matchStatsTableView.frame.width * 0.5
-//            }
+            createHomePercentage(homeInput: homeTeamStatsArray[indexPath.section], awayInput: awayTeamStatsArray[indexPath.section], index: indexPath.section)
+        
+            homeStatsShapeLayer.frame = CGRect(x: awayStatsBounds.origin.x, y: awayStatsBounds.origin.y, width: awayStatsBounds.width * homeStatsWidthArray[indexPath.section], height: awayStatsBounds.height)
+            
+            cell.homeStatLabel.text = String(homeTeamStatsArray[indexPath.section])
+            cell.awayStatLabel.text = String(awayTeamStatsArray[indexPath.section])
+            
+            homeStatsShapeLayer.fillColor = UIColor.blue.cgColor
+            homeStatsShapeLayer.path = UIBezierPath(rect: homeStatsShapeLayer.bounds).cgPath
+            
+            // Remove away stats view sublayer if present
+            if cell.awayStatsView.layer.sublayers?.count == 3 {
+                cell.awayStatsView.layer.sublayers!.remove(at: 1)
+            }
+            cell.awayStatsView.layer.insertSublayer(homeStatsShapeLayer, at: 1)
         }
-        
         return cell
     }
     
@@ -216,4 +213,5 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         
         return headerView
     }
+
 }
