@@ -15,7 +15,7 @@ struct Theme{
     static var primaryTeamColour = UIColor(red: 39/255, green: 68/255, blue: 135/255, alpha: 1.0)
     static var secondaryTeamColour = UIColor.white
     
-    // MARK: - ToDo Table Section Headers
+    // MARK: - Table Section Headers
     static var sectionHeaderTitleFont = UIFont(name: "Helvetica-Bold", size: 20)
     static var sectionHeaderTitleColor = UIColor.white
     static var sectionHeaderBackgroundColor = UIColor.black
@@ -25,7 +25,7 @@ struct Theme{
 
 struct TeamColours {
     static let primaryColour = [
-        "t11": UIColor(red: 39/255, green: 68/255, blue: 135/255, alpha: 1.0),
-        "t91": UIColor(red: 230/255, green: 35/255, blue: 51/255, alpha: 1.0)
+        "Everton": UIColor(red: 39/255, green: 68/255, blue: 135/255, alpha: 1.0),
+        "Bournemouth": UIColor(red: 230/255, green: 35/255, blue: 51/255, alpha: 1.0)
     ]
 }

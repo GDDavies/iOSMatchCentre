@@ -131,7 +131,9 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         let cell = tableView.dequeueReusableCell(withIdentifier: "MatchStatsCell", for: indexPath) as! MatchStatsTableViewCell
         
         // Away team colour
-        cell.awayStatsView.backgroundColor = TeamColours.primaryColour["t11"]
+        if let awayName = MatchJSONData.sharedInstance.awayTeamName {
+            cell.awayStatsView.backgroundColor = TeamColours.primaryColour["\(String(describing: awayName))"]
+        }
         
         if homeTeamStatsArray[1] != 0.0 {
             
@@ -150,8 +152,10 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             cell.awayStatLabel.text = formatter.string(from: NSNumber(value: awayTeamStatsArray[indexPath.section]))
             
             // Home team colour
-            homeStatsShapeLayer.fillColor = TeamColours.primaryColour["t91"]?.cgColor
-            homeStatsShapeLayer.path = UIBezierPath(rect: homeStatsShapeLayer.bounds).cgPath
+            if let homeName = MatchJSONData.sharedInstance.homeTeamName {
+                homeStatsShapeLayer.fillColor = TeamColours.primaryColour["\(String(describing: homeName))"]?.cgColor
+                homeStatsShapeLayer.path = UIBezierPath(rect: homeStatsShapeLayer.bounds).cgPath
+            }
             
             // Remove away stats view sublayer if present
             if cell.awayStatsView.layer.sublayers?.count == 1 {
