@@ -44,20 +44,11 @@ class MatchStatsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getMatchStatsData()
         self.view.addSubview(containerViewA)
         MatchJSONData.sharedInstance.getMatchStatsData()
-        NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsViewController.test), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsViewController.populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
     }
     
-    func test() {
-        print(MatchJSONData.sharedInstance.matchStatsJSON?.count)
-    }
-    
-    func otherTest() {
-        //print(JSONMatchLineUpsData.lineUpsSharedInstance.lineUpJSON!)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,92 +56,51 @@ class MatchStatsViewController: UIViewController {
     
     // MARK: - Setup Match Stats Data
     
-    // Retreive all match stats data from JSON feed
-    func getMatchStatsData() {
-        let url = URL(string: "https://feeds.tribehive.co.uk/DigitalStadiumServer/opta?pageType=match&value=803294&v=5")
-        
-        let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            DispatchQueue.main.async(execute: {
-                if let unwrappedData = data {
-                    // If successful pass data object to populate function
-                    self.populateMatchStatsData(unwrappedData)
-                } else {
-                    // Error popup
-                    print("Unable to retrieve data")
-                }
-            })
-        })
-        task.resume()
-    }
-    
-    func populateMatchStatsData(_ matchStatsData: Data) {
-        do {
-            // Create diciotnary from JSON data object
-            let json = try JSONSerialization.jsonObject(with: matchStatsData, options: []) as! NSDictionary
+    func populateMatchStatsData() {
             
-            if let competitionName = json["competition"] {
-                competitionNameLabel.text = String(describing: competitionName)
-            }
-            if let venueName = json["venue"] {
-                venueLabel.text = String(describing: venueName)
-            }
-            if let attendanceSize = json["attendance"] {
-                let numberFormatter = NumberFormatter()
-                numberFormatter.numberStyle = NumberFormatter.Style.decimal
-                let formattedAttendance = numberFormatter.string(from: NSNumber(value:attendanceSize as! Int))
-                attendanceLabel.text = "Attendance: \(formattedAttendance!)"
-            }
-            if let refereeName = json["referee"] {
-                refereeLabel.text = "Ref: " + String(describing: refereeName)
-            }
-            
-            if let homeTeam = json["home"] as? NSDictionary {
-                
-                if let homeTeamNameText = homeTeam["name"] {
-                    homeTeamName.text = String(describing: homeTeamNameText)
-                }
-                
-                if let homeTeamID = homeTeam["id"] {
-                    homeID = String(describing: homeTeamID)
-                }
-            }
-            
-            if let awayTeam = json["away"] as? NSDictionary {
-                
-                if let awayTeamNameText = awayTeam["name"] {
-                    awayTeamName.text = String(describing: awayTeamNameText)
-                }
-                
-                if let awayTeamID = awayTeam["id"] {
-                    awayID = String(describing: awayTeamID)
-                }
-            }
-            
-            if let homeTeamStats = json["homeStats"] as? NSDictionary {
-                
-                homeTeamStatsDict = homeTeamStats as! [String : Any]
-                
-                if let homeTeamScoreText = homeTeamStats["score"] {
-                    homeTeamScore.text = String(describing: homeTeamScoreText)
-                }
-                
-                //performSegue(withIdentifier: "ShowMatchStatsBars", sender: Any?.self)
-            }
-            
-            if let awayTeamStats = json["awayStats"] as? NSDictionary {
-                
-                if let awayTeamScoreText = awayTeamStats["score"] {
-                    awayTeamScore.text = String(describing: awayTeamScoreText)
-                }
-            }
-            
-            // Reload view once all JSON data is loaded
-            //tableView.reloadData()
-            loadLogos()
-        } catch {
-            // Error popup
-            print("Error fetching data")
+        if let competitionName = MatchJSONData.sharedInstance.matchStatsJSON?["competition"] {
+            competitionNameLabel.text = String(describing: competitionName)
         }
+        if let venueName = MatchJSONData.sharedInstance.matchStatsJSON?["venue"] {
+            venueLabel.text = String(describing: venueName)
+        }
+        if let attendanceSize = MatchJSONData.sharedInstance.matchStatsJSON?["attendance"] {
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = NumberFormatter.Style.decimal
+            let formattedAttendance = numberFormatter.string(from: NSNumber(value:attendanceSize as! Int))
+            attendanceLabel.text = "Attendance: \(formattedAttendance!)"
+        }
+        if let refereeName = MatchJSONData.sharedInstance.matchStatsJSON?["referee"] {
+            refereeLabel.text = "Ref: " + String(describing: refereeName)
+        }
+        if let homeTeam = MatchJSONData.sharedInstance.matchStatsJSON?["home"] as? NSDictionary {
+            if let homeTeamNameText = homeTeam["name"] {
+                homeTeamName.text = String(describing: homeTeamNameText)
+            }
+            if let homeTeamID = homeTeam["id"] {
+                homeID = String(describing: homeTeamID)
+            }
+        }
+        if let awayTeam = MatchJSONData.sharedInstance.matchStatsJSON?["away"] as? NSDictionary {
+            if let awayTeamNameText = awayTeam["name"] {
+                awayTeamName.text = String(describing: awayTeamNameText)
+            }
+            if let awayTeamID = awayTeam["id"] {
+                awayID = String(describing: awayTeamID)
+            }
+        }
+        if let homeTeamStats = MatchJSONData.sharedInstance.matchStatsJSON?["homeStats"] as? NSDictionary {
+            homeTeamStatsDict = homeTeamStats as! [String : Any]
+            if let homeTeamScoreText = homeTeamStats["score"] {
+                homeTeamScore.text = String(describing: homeTeamScoreText)
+            }
+        }
+        if let awayTeamStats = MatchJSONData.sharedInstance.matchStatsJSON?["awayStats"] as? NSDictionary {
+            if let awayTeamScoreText = awayTeamStats["score"] {
+                awayTeamScore.text = String(describing: awayTeamScoreText)
+            }
+        }
+        loadLogos()
     }
     
     func loadLogos() {
@@ -165,22 +115,5 @@ class MatchStatsViewController: UIViewController {
 
 
     // MARK: - Navigation
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ShowLineUps" {
-//            if let vc = segue.destination as? LineUpsViewController {
-//                vc.test = "Test"
-//            }
-//        }
-//    }
-    
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        if identifier == "ShowLineUps" {
-//            if homeTeamStatsDict.count > 0 {
-//                return true
-//            }
-//        }
-//        return false
-//    }
 
 }

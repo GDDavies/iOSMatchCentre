@@ -23,7 +23,7 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
         getData()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
-        CommentaryJSONData.sharedInstance.getData()
+        CommentaryJSONData.sharedInstance.getMatchCommentaryData()
         NotificationCenter.default.addObserver(self, selector: #selector(CommentaryViewController.test), name: NSNotification.Name(rawValue: commentaryDataNCKey), object: nil)
     }
     

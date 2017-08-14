@@ -27,7 +27,6 @@ class MatchJSONData: NSObject {
                     // If successful pass data object to json variable as dictionary
                     do {
                         MatchJSONData.sharedInstance.matchStatsJSON = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as? NSDictionary
-                        print("Got match data")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: matchDataNCKey), object: self)
                     } catch {
                         // Error popup
@@ -48,7 +47,7 @@ class CommentaryJSONData: NSObject {
     static let sharedInstance = CommentaryJSONData()
     var commentaryJSON: NSArray?
     
-    func getData() {
+    func getMatchCommentaryData() {
         let url = URL(string: "https://feeds.tribehive.co.uk/DigitalStadiumServer/opta?pageType=matchCommentary&value=803294&v=2")
         
         let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
@@ -57,7 +56,6 @@ class CommentaryJSONData: NSObject {
                     do {
                         // Retrieve array of dictionaries
                         CommentaryJSONData.sharedInstance.commentaryJSON = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as? NSArray
-                        print("Got commentary data")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: commentaryDataNCKey), object: self)
                     } catch {
                         // Error popup
