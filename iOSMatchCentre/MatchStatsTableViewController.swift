@@ -155,7 +155,8 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MatchStatsCell", for: indexPath) as! MatchStatsTableViewCell
         
-        cell.awayStatsView.backgroundColor = Theme.primaryTeamColour
+        // Away team colour
+        cell.awayStatsView.backgroundColor = TeamColours.primaryColour["t11"]
         
         if homeTeamStatsArray[1] != 0.0 {
             
@@ -173,7 +174,9 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             cell.homeStatLabel.text = formatter.string(from: NSNumber(value: homeTeamStatsArray[indexPath.section]))
             cell.awayStatLabel.text = formatter.string(from: NSNumber(value: awayTeamStatsArray[indexPath.section]))
             
-            homeStatsShapeLayer.fillColor = UIColor(red: 230/255, green: 35/255, blue: 51/255, alpha: 1.0).cgColor
+            // Home team colour
+            homeStatsShapeLayer.fillColor = TeamColours.primaryColour["t91"]?.cgColor
+                //UIColor(red: 230/255, green: 35/255, blue: 51/255, alpha: 1.0).cgColor
             homeStatsShapeLayer.path = UIBezierPath(rect: homeStatsShapeLayer.bounds).cgPath
             
             // Remove away stats view sublayer if present
@@ -211,5 +214,5 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         
         return headerView
     }
-
+    
 }

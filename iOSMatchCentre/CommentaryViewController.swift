@@ -23,11 +23,17 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
         getData()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
+        CommentaryJSONData.sharedInstance.getData()
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentaryViewController.test), name: NSNotification.Name(rawValue: commentaryDataNCKey), object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func test() {
+        print(CommentaryJSONData.sharedInstance.commentaryJSON!.count)
     }
     
     // MARK: - Setup Commentary Data

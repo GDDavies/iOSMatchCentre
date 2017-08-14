@@ -22,3 +22,17 @@ struct Theme{
     static var sectionHeaderBackgroundColorHighlighted = UIColor.gray
     static var sectionHeaderAlpha: CGFloat = 1.0
 }
+
+class TeamInformation {
+    let logoList = [
+        "t11": "Everton",
+        "t91": "Bournemouth"
+    ]
+}
+
+struct TeamColours {
+    static let primaryColour = [
+        "t11": UIColor(red: 39/255, green: 68/255, blue: 135/255, alpha: 1.0),
+        "t91": UIColor(red: 230/255, green: 35/255, blue: 51/255, alpha: 1.0)
+    ]
+}

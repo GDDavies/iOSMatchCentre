@@ -27,6 +27,9 @@ class MatchStatsViewController: UIViewController {
     @IBOutlet weak var containerViewB: UIView!
     @IBOutlet weak var containerViewC: UIView!
     
+    var homeID: String?
+    var awayID: String?
+    
     var homeTeamStatsDict = [String : Any]()
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
@@ -43,6 +46,16 @@ class MatchStatsViewController: UIViewController {
         super.viewDidLoad()
         getMatchStatsData()
         self.view.addSubview(containerViewA)
+        MatchJSONData.sharedInstance.getMatchStatsData()
+        NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsViewController.test), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+    }
+    
+    func test() {
+        print(MatchJSONData.sharedInstance.matchStatsJSON?.count)
+    }
+    
+    func otherTest() {
+        //print(JSONMatchLineUpsData.lineUpsSharedInstance.lineUpJSON!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,12 +109,20 @@ class MatchStatsViewController: UIViewController {
                 if let homeTeamNameText = homeTeam["name"] {
                     homeTeamName.text = String(describing: homeTeamNameText)
                 }
+                
+                if let homeTeamID = homeTeam["id"] {
+                    homeID = String(describing: homeTeamID)
+                }
             }
             
             if let awayTeam = json["away"] as? NSDictionary {
                 
                 if let awayTeamNameText = awayTeam["name"] {
                     awayTeamName.text = String(describing: awayTeamNameText)
+                }
+                
+                if let awayTeamID = awayTeam["id"] {
+                    awayID = String(describing: awayTeamID)
                 }
             }
             
@@ -125,10 +146,21 @@ class MatchStatsViewController: UIViewController {
             
             // Reload view once all JSON data is loaded
             //tableView.reloadData()
+            loadLogos()
         } catch {
             // Error popup
             print("Error fetching data")
         }
+    }
+    
+    func loadLogos() {
+        let teamLogos = TeamInformation()
+
+        let homeTeamLogo = teamLogos.logoList["\(String(describing: homeID!))"]
+        let awayTeamLogo = teamLogos.logoList["\(String(describing: awayID!))"]
+
+        self.homeTeamLogo.image = UIImage(named: "\(String(describing: homeTeamLogo!)).png")
+        self.awayTeamLogo.image = UIImage(named: "\(String(describing: awayTeamLogo!)).png")
     }
 
 

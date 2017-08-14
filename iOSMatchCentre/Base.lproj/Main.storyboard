@@ -109,7 +109,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ns6-CP-Uy1">
                                 <rect key="frame" x="0.0" y="8" width="375" height="130.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bournemouth-football-club-logo" translatesAutoresizingMaskIntoConstraints="NO" id="syl-7P-3UQ">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="syl-7P-3UQ">
                                         <rect key="frame" x="24" y="0.0" width="74" height="74"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="74" id="HyW-kt-Vol"/>
@@ -142,7 +142,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="everton-football-club-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Woy-l2-yaU">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Woy-l2-yaU">
                                         <rect key="frame" x="277" y="0.0" width="74" height="74"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="74" id="JdD-qw-46g"/>
@@ -359,7 +359,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="398"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MatchStatsCell" id="ODl-30-KTb" customClass="MatchStatsTableViewCell" customModule="iOSMatchCentre" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MatchStatsCell" id="ODl-30-KTb" customClass="MatchStatsTableViewCell" customModule="iOSMatchCentre" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ODl-30-KTb" id="YFH-rt-uZg">
@@ -528,8 +528,4 @@
             <point key="canvasLocation" x="2696.8000000000002" y="592.80359820089961"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Bournemouth-football-club-logo" width="241" height="316"/>
-        <image name="everton-football-club-logo" width="450" height="450"/>
-    </resources>
 </document>

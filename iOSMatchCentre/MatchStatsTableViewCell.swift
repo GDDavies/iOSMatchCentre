@@ -18,10 +18,22 @@ class MatchStatsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
+        let color = awayStatsView.backgroundColor
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        if(selected) {
+            awayStatsView.backgroundColor = color
+        }
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        let color = awayStatsView.backgroundColor
+        super.setHighlighted(highlighted, animated: animated)
+        
+        if(highlighted) {
+            awayStatsView.backgroundColor = color
+        }
     }
 }
