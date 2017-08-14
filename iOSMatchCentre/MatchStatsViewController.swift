@@ -24,13 +24,10 @@ class MatchStatsViewController: UIViewController {
     @IBOutlet weak var refereeLabel: UILabel!
     
     @IBOutlet weak var containerViewA: UIView!
-    @IBOutlet weak var containerViewB: UIView!
     @IBOutlet weak var containerViewC: UIView!
     
     var homeID: String?
     var awayID: String?
-    
-    var homeTeamStatsDict = [String : Any]()
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
@@ -45,72 +42,31 @@ class MatchStatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(containerViewA)
-        MatchJSONData.sharedInstance.getMatchStatsData()
         NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsViewController.populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Setup Match Stats Data
     
     func populateMatchStatsData() {
-            
-        if let competitionName = MatchJSONData.sharedInstance.matchStatsJSON?["competition"] {
-            competitionNameLabel.text = String(describing: competitionName)
-        }
-        if let venueName = MatchJSONData.sharedInstance.matchStatsJSON?["venue"] {
-            venueLabel.text = String(describing: venueName)
-        }
-        if let attendanceSize = MatchJSONData.sharedInstance.matchStatsJSON?["attendance"] {
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = NumberFormatter.Style.decimal
-            let formattedAttendance = numberFormatter.string(from: NSNumber(value:attendanceSize as! Int))
-            attendanceLabel.text = "Attendance: \(formattedAttendance!)"
-        }
-        if let refereeName = MatchJSONData.sharedInstance.matchStatsJSON?["referee"] {
-            refereeLabel.text = "Ref: " + String(describing: refereeName)
-        }
-        if let homeTeam = MatchJSONData.sharedInstance.matchStatsJSON?["home"] as? NSDictionary {
-            if let homeTeamNameText = homeTeam["name"] {
-                homeTeamName.text = String(describing: homeTeamNameText)
-            }
-            if let homeTeamID = homeTeam["id"] {
-                homeID = String(describing: homeTeamID)
-            }
-        }
-        if let awayTeam = MatchJSONData.sharedInstance.matchStatsJSON?["away"] as? NSDictionary {
-            if let awayTeamNameText = awayTeam["name"] {
-                awayTeamName.text = String(describing: awayTeamNameText)
-            }
-            if let awayTeamID = awayTeam["id"] {
-                awayID = String(describing: awayTeamID)
-            }
-        }
-        if let homeTeamStats = MatchJSONData.sharedInstance.matchStatsJSON?["homeStats"] as? NSDictionary {
-            homeTeamStatsDict = homeTeamStats as! [String : Any]
-            if let homeTeamScoreText = homeTeamStats["score"] {
-                homeTeamScore.text = String(describing: homeTeamScoreText)
-            }
-        }
-        if let awayTeamStats = MatchJSONData.sharedInstance.matchStatsJSON?["awayStats"] as? NSDictionary {
-            if let awayTeamScoreText = awayTeamStats["score"] {
-                awayTeamScore.text = String(describing: awayTeamScoreText)
-            }
-        }
+        competitionNameLabel.text = MatchJSONData.sharedInstance.competition
+        venueLabel.text = MatchJSONData.sharedInstance.venue
+        attendanceLabel.text = MatchJSONData.sharedInstance.attendance
+        refereeLabel.text = MatchJSONData.sharedInstance.referee
+        homeTeamName.text = MatchJSONData.sharedInstance.homeTeamName
+        awayTeamName.text = MatchJSONData.sharedInstance.awayTeamName
+        homeTeamScore.text = MatchJSONData.sharedInstance.homeTeamScore
+        awayTeamScore.text = MatchJSONData.sharedInstance.awayTeamScore
+        
         loadLogos()
     }
     
     func loadLogos() {
-        let teamLogos = TeamInformation()
-
-        let homeTeamLogo = teamLogos.logoList["\(String(describing: homeID!))"]
-        let awayTeamLogo = teamLogos.logoList["\(String(describing: awayID!))"]
-
-        self.homeTeamLogo.image = UIImage(named: "\(String(describing: homeTeamLogo!)).png")
-        self.awayTeamLogo.image = UIImage(named: "\(String(describing: awayTeamLogo!)).png")
+        self.homeTeamLogo.image = UIImage(named: "\(String(describing: MatchJSONData.sharedInstance.homeTeamName!)).png")
+        self.awayTeamLogo.image = UIImage(named: "\(String(describing: MatchJSONData.sharedInstance.awayTeamName!)).png")
     }
 
 

@@ -22,7 +22,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        getMatchStatsData()
+        NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsTableViewController.populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,89 +30,64 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         // Dispose of any resources that can be recreated.
     }
     
-    // Retreive all match stats data from JSON feed
-    func getMatchStatsData() {
-        let url = URL(string: "https://feeds.tribehive.co.uk/DigitalStadiumServer/opta?pageType=match&value=803294&v=5")
+    func populateMatchStatsData() {
         
-        let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            DispatchQueue.main.async(execute: {
-                if let unwrappedData = data {
-                    // If successful pass data object to populate function
-                    self.populateMatchStatsData(unwrappedData)
-                } else {
-                    // Error popup
-                    print("Unable to retrieve data")
-                }
-            })
-        })
-        task.resume()
-    }
-    
-    func populateMatchStatsData(_ matchStatsData: Data) {
-        do {
-            // Create diciotnary from JSON data object
-            let json = try JSONSerialization.jsonObject(with: matchStatsData, options: []) as! NSDictionary
+        if let homeTeamStats = MatchJSONData.sharedInstance.matchStatsJSON?["homeStats"] as? NSDictionary {
             
-            if let homeTeamStats = json["homeStats"] as? NSDictionary {
+            for (key, value) in homeTeamStats {
                 
-                for (key, value) in homeTeamStats {
-                    
-                    switch key as! String {
-                    case "halfTimeScore":
-                        homeTeamStatsArray[0] = value as! Double
-                    case "possession":
-                        homeTeamStatsArray[1] = value as! Double
-                    case "shots":
-                        homeTeamStatsArray[2] = value as! Double
-                    case "shotsOnTarget":
-                        homeTeamStatsArray[3] = value as! Double
-                    case "corners":
-                        homeTeamStatsArray[4] = value as! Double
-                    case "fouls":
-                        homeTeamStatsArray[5] = value as! Double
-                    case "yellowCards":
-                        homeTeamStatsArray[6] = value as! Double
-                    case "redCards":
-                        homeTeamStatsArray[7] = value as! Double
-                    default:
-                        print("error")
-                    }
+                switch key as! String {
+                case "halfTimeScore":
+                    homeTeamStatsArray[0] = value as! Double
+                case "possession":
+                    homeTeamStatsArray[1] = value as! Double
+                case "shots":
+                    homeTeamStatsArray[2] = value as! Double
+                case "shotsOnTarget":
+                    homeTeamStatsArray[3] = value as! Double
+                case "corners":
+                    homeTeamStatsArray[4] = value as! Double
+                case "fouls":
+                    homeTeamStatsArray[5] = value as! Double
+                case "yellowCards":
+                    homeTeamStatsArray[6] = value as! Double
+                case "redCards":
+                    homeTeamStatsArray[7] = value as! Double
+                default:
+                    print("error")
                 }
             }
-            
-            if let awayTeamStats = json["awayStats"] as? NSDictionary {
-                
-                for (key, value) in awayTeamStats {
-                    
-                    switch key as! String {
-                    case "halfTimeScore":
-                        awayTeamStatsArray[0] = value as! Double
-                    case "possession":
-                        awayTeamStatsArray[1] = value as! Double
-                    case "shots":
-                        awayTeamStatsArray[2] = value as! Double
-                    case "shotsOnTarget":
-                        awayTeamStatsArray[3] = value as! Double
-                    case "corners":
-                        awayTeamStatsArray[4] = value as! Double
-                    case "fouls":
-                        awayTeamStatsArray[5] = value as! Double
-                    case "yellowCards":
-                        awayTeamStatsArray[6] = value as! Double
-                    case "redCards":
-                        awayTeamStatsArray[7] = value as! Double
-                    default:
-                        print("error")
-                    }
-                }
-            }
-            
-            // Reload view once all JSON data is loaded
-            matchStatsTableView.reloadData()
-        } catch {
-            // Error popup
-            print("Error fetching data")
         }
+        
+        if let awayTeamStats = MatchJSONData.sharedInstance.matchStatsJSON?["awayStats"] as? NSDictionary {
+            
+            for (key, value) in awayTeamStats {
+                
+                switch key as! String {
+                case "halfTimeScore":
+                    awayTeamStatsArray[0] = value as! Double
+                case "possession":
+                    awayTeamStatsArray[1] = value as! Double
+                case "shots":
+                    awayTeamStatsArray[2] = value as! Double
+                case "shotsOnTarget":
+                    awayTeamStatsArray[3] = value as! Double
+                case "corners":
+                    awayTeamStatsArray[4] = value as! Double
+                case "fouls":
+                    awayTeamStatsArray[5] = value as! Double
+                case "yellowCards":
+                    awayTeamStatsArray[6] = value as! Double
+                case "redCards":
+                    awayTeamStatsArray[7] = value as! Double
+                default:
+                    print("error")
+                }
+            }
+        }
+        
+        // Reload view once all JSON data is loaded
+        matchStatsTableView.reloadData()
     }
 
     /*
@@ -176,7 +151,6 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             
             // Home team colour
             homeStatsShapeLayer.fillColor = TeamColours.primaryColour["t91"]?.cgColor
-                //UIColor(red: 230/255, green: 35/255, blue: 51/255, alpha: 1.0).cgColor
             homeStatsShapeLayer.path = UIBezierPath(rect: homeStatsShapeLayer.bounds).cgPath
             
             // Remove away stats view sublayer if present
@@ -188,6 +162,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         return cell
     }
     
+    // Set header heights
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 35.0

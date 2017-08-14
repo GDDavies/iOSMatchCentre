@@ -35,6 +35,9 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Theme.secondaryTeamColour]
         segmentController.tintColor = Theme.secondaryTeamColour
         segmentController.backgroundColor = Theme.primaryTeamColour
+        
+        MatchJSONData.sharedInstance.getMatchStatsData()
+        CommentaryJSONData.sharedInstance.getMatchCommentaryData()
     }
 
     override func didReceiveMemoryWarning() {
