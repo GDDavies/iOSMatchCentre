@@ -16,13 +16,11 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
     
     var homeTeamStatsArray = [Double]()
     var awayTeamStatsArray = [Double]()
-    
-    var homeStatsWidthArray: [CGFloat] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
-
         
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsTableViewController.populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+        matchStatsTableView.layoutIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,29 +71,28 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         return array
     }
 
-
     /*
     // MARK: - Navigation
 
     */
     
-    func createHomePercentage(homeInput: Double, awayInput: Double, index: Int) {
+    // Return width
+    func createHomePercentage(homeInput: Double, awayInput: Double, index: Int) -> CGFloat {
         
         let sum = homeInput + awayInput
+        var width:CGFloat = 0.0
         
         if homeInput == 0 && awayInput == 0 {
-            homeStatsWidthArray.remove(at: index)
-            homeStatsWidthArray.insert(CGFloat(0.5), at: index)
+            width = 0.5
         } else if homeInput == 0 {
-            homeStatsWidthArray.remove(at: index)
-            homeStatsWidthArray.insert(CGFloat(0.0), at: index)
+            width = 0.0
         } else if awayInput == 0 {
-            homeStatsWidthArray.remove(at: index)
-            homeStatsWidthArray.insert(CGFloat(1.0), at: index)
+            width = 1.0
         } else {
-            homeStatsWidthArray.remove(at: index)
-            homeStatsWidthArray.insert(CGFloat(homeInput / sum), at: index)
+
+            width = CGFloat(homeInput / sum)
         }
+        return width
     }
     
     // MARK: - TableView methods
@@ -116,7 +113,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         }
         
         if !homeTeamStatsArray.isEmpty {
-            
+                
             let homeStatsShapeLayer = CAShapeLayer()
             let awayStatsBounds = cell.awayStatsView.bounds
             
@@ -125,9 +122,9 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             formatter.minimumFractionDigits = 0
             formatter.maximumFractionDigits = 0
             
-            createHomePercentage(homeInput: homeTeamStatsArray[indexPath.section], awayInput: awayTeamStatsArray[indexPath.section], index: indexPath.section)
+            let homeStatsWidth = createHomePercentage(homeInput: homeTeamStatsArray[indexPath.section], awayInput: awayTeamStatsArray[indexPath.section], index: indexPath.section)
         
-            homeStatsShapeLayer.frame = CGRect(x: awayStatsBounds.origin.x, y: awayStatsBounds.origin.y, width: awayStatsBounds.width * homeStatsWidthArray[indexPath.section], height: awayStatsBounds.height)
+            homeStatsShapeLayer.frame = CGRect(x: awayStatsBounds.origin.x, y: awayStatsBounds.origin.y, width: awayStatsBounds.width * homeStatsWidth, height: awayStatsBounds.height)
             
             cell.homeStatLabel.text = formatter.string(from: NSNumber(value: homeTeamStatsArray[indexPath.section]))
             cell.awayStatLabel.text = formatter.string(from: NSNumber(value: awayTeamStatsArray[indexPath.section]))
