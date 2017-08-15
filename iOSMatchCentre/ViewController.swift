@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.removeOverlay), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
         
         // Do any additional setup after loading the view, typically from a nib.
