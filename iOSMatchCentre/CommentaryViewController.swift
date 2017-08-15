@@ -17,13 +17,32 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
     var eventHeadings = [String]()
     var eventDescriptions = [String]()
     
+    var refreshControl: UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        getData()
+        // Setup table view cell heights
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 200
-        NotificationCenter.default.addObserver(self, selector: #selector(CommentaryViewController.test), name: NSNotification.Name(rawValue: commentaryDataNCKey), object: nil)
+        tableView.estimatedRowHeight = 100
+        
+        // Notification observer for when json data is successfully loaded
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentaryViewController.populateData), name: NSNotification.Name(rawValue: commentaryDataNCKey), object: nil)
+        
+        // Refresh control to update data
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    func refreshData() {
+        CommentaryJSONData.sharedInstance.getMatchCommentaryData()
+        tableView.reloadData()
+        if self.refreshControl.isRefreshing {
+            self.refreshControl.endRefreshing()
+        }
+        
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,48 +50,22 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
         // Dispose of any resources that can be recreated.
     }
     
-    func test() {
-        print(CommentaryJSONData.sharedInstance.commentaryJSON!.count)
-    }
-    
     // MARK: - Setup Commentary Data
     
-    func getData() {
-        let url = URL(string: "https://feeds.tribehive.co.uk/DigitalStadiumServer/opta?pageType=matchCommentary&value=803294&v=2")
-        
-        let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            DispatchQueue.main.async(execute: {
-                if let unwrappedData = data {
-                    self.populateData(unwrappedData)
-                } else {
-                    // Error popup
-                    print("Unable to retrieve data")
-                }
-            })
-        })
-        task.resume()
-    }
-    
-    func populateData(_ matchCommentaryData: Data) {
-        do {
-            // Retrieve array of dictionaries
-            let json = try JSONSerialization.jsonObject(with: matchCommentaryData, options: []) as! NSArray
-            
+    func populateData() {
+        if let commentaryData = CommentaryJSONData.sharedInstance.commentaryJSON {
             // Loop through array and assign each value to array
-            for i in 0..<json.count {
-                if let matchEvent = json[i] as? NSDictionary {
+            for i in 0..<commentaryData.count {
+                if let matchEvent = commentaryData[i] as? NSDictionary {
                     eventTypes.append(matchEvent["type"] as! String)
                     eventTimes.append(matchEvent["time"] as! String)
                     eventHeadings.append(matchEvent["heading"] as! String)
                     eventDescriptions.append(matchEvent["description"] as! String)
                 }
             }
-            // Reload tableView data once all JSON data is loaded
-            tableView.reloadData()
-        } catch {
-            // Error popup
-            print("Error fetching data")
         }
+        // Reload tableView data once all JSON data is loaded
+        tableView.reloadData()
     }
     
     // MARK: - Navigation

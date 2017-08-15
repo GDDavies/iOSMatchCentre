@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */,
-				93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */,
+				9356FDF51F42628F000DB9AB /* Custom Cells */,
 			);
 			name = Commentary;
 			sourceTree = "<group>";
@@ -172,6 +172,14 @@
 			children = (
 				9326EB321F3F823E003F9FBA /* LineUpsTableViewCell.swift */,
 				9326AD2B1F3E63E9005B0764 /* MatchStatsTableViewCell.swift */,
+			);
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		9356FDF51F42628F000DB9AB /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";

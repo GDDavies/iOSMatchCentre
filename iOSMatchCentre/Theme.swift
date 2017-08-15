@@ -11,11 +11,11 @@ import UIKit
 
 struct Theme{
     
-    // MARK: - Team colours
+    // Main team colours
     static var primaryTeamColour = UIColor(red: 39/255, green: 68/255, blue: 135/255, alpha: 1.0)
     static var secondaryTeamColour = UIColor.white
     
-    // MARK: - Table Section Headers
+    // Table Section Headers
     static var sectionHeaderTitleFont = UIFont(name: "Helvetica-Bold", size: 20)
     static var sectionHeaderTitleColor = UIColor.white
     static var sectionHeaderBackgroundColor = UIColor.black
