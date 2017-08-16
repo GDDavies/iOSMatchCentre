@@ -12,13 +12,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var containerViewA: UIView!
     @IBOutlet weak var containerViewB: UIView!
-    @IBOutlet weak var segmentController: UISegmentedControl!
     
     var loadingOverlay: UIView?
     var loadingDataIndicator: UIActivityIndicatorView?
-    
-    @IBAction func segmentedController(_ sender: UISegmentedControl) {
-            }
     
     @IBAction func customSegmentedController(_ sender: CustomSegmentedControl) {
         if sender.selectedButtonIndex == 0 {
