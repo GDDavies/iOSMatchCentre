@@ -18,7 +18,10 @@ class ViewController: UIViewController {
     var loadingDataIndicator: UIActivityIndicatorView?
     
     @IBAction func segmentedController(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+            }
+    
+    @IBAction func customSegmentedController(_ sender: CustomSegmentedControl) {
+        if sender.selectedButtonIndex == 0 {
             UIView.animate(withDuration: 0.5, animations: {
                 self.bringContainerViewAToFront()
             })
@@ -37,11 +40,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.bringContainerViewAToFront()
         
-        navigationController?.navigationBar.barTintColor = Theme.primaryTeamColour
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Theme.secondaryTeamColour]
-        segmentController.tintColor = Theme.secondaryTeamColour
-        segmentController.backgroundColor = Theme.primaryTeamColour
-        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.barTintColor = Theme.primaryTeamColour
+
         MatchJSONData.sharedInstance.getMatchStatsData()
         CommentaryJSONData.sharedInstance.getMatchCommentaryData()
         
@@ -77,20 +80,11 @@ class ViewController: UIViewController {
     }
     
     func bringContainerViewAToFront() {
-        
-//        if containerViewB.isDescendant(of: view) {
-//            containerViewB.removeFromSuperview()
-//        }
-//        self.view.addSubview(containerViewA)
         self.containerViewA.alpha = 1
         self.containerViewB.alpha = 0
     }
     
     func bringContainerViewBToFront() {
-//        if containerViewA.isDescendant(of: view) {
-//            containerViewA.removeFromSuperview()
-//        }
-//        self.view.addSubview(containerViewB)
         self.containerViewB.alpha = 1
         self.containerViewA.alpha = 0
     }

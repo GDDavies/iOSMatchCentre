@@ -23,6 +23,7 @@
 		93308AFC1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */; };
 		93308AFE1F3DCE61004C2A38 /* MatchStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93308AFD1F3DCE61004C2A38 /* MatchStatsViewController.swift */; };
 		9356FDF41F421030000DB9AB /* JSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9356FDF31F421030000DB9AB /* JSONData.swift */; };
+		9396C65F1F444C9E0048765F /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9396C65E1F444C9E0048765F /* CustomSegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryTableViewCell.swift; sourceTree = "<group>"; };
 		93308AFD1F3DCE61004C2A38 /* MatchStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchStatsViewController.swift; sourceTree = "<group>"; };
 		9356FDF31F421030000DB9AB /* JSONData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONData.swift; sourceTree = "<group>"; };
+		9396C65E1F444C9E0048765F /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				93308B001F3DCE7D004C2A38 /* Match Stats */,
 				9356FDF31F421030000DB9AB /* JSONData.swift */,
 				9326EB2C1F3F4E5C003F9FBA /* Theme.swift */,
+				9396C65E1F444C9E0048765F /* CustomSegmentedControl.swift */,
 				9313BD571F3CE70F00CCD341 /* Main.storyboard */,
 				9313BD5A1F3CE70F00CCD341 /* Assets.xcassets */,
 				9313BD5C1F3CE70F00CCD341 /* LaunchScreen.storyboard */,
@@ -332,6 +335,7 @@
 				9313BD841F3D0F2900CCD341 /* CommentaryViewController.swift in Sources */,
 				9326AD2C1F3E63E9005B0764 /* MatchStatsTableViewCell.swift in Sources */,
 				9326AD2A1F3E621C005B0764 /* MatchStatsTableViewController.swift in Sources */,
+				9396C65F1F444C9E0048765F /* CustomSegmentedControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

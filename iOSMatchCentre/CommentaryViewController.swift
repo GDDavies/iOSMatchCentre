@@ -51,7 +51,6 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     // MARK: - Setup Commentary Data
-    
     func populateData() {
         if let commentaryData = CommentaryJSONData.sharedInstance.commentaryJSON {
             // Loop through array and assign each value to array
@@ -72,7 +71,6 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
 
     
     // MARK: - TableView Methods
-
     func numberOfSections(in tableView: UITableView) -> Int {
         return eventDescriptions.count
     }
