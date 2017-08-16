@@ -57,8 +57,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="FQf-hf-fYl" firstAttribute="top" secondItem="Th2-12-lgy" secondAttribute="bottom" id="A1H-Ik-Ddh"/>
+                            <constraint firstItem="FQf-hf-fYl" firstAttribute="top" secondItem="Th2-12-lgy" secondAttribute="bottom" id="0ci-zz-cO3"/>
                             <constraint firstItem="91d-ag-iEc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="BSX-Lm-xA3"/>
+                            <constraint firstItem="91d-ag-iEc" firstAttribute="top" secondItem="Th2-12-lgy" secondAttribute="bottom" id="DT8-3G-CYI"/>
                             <constraint firstAttribute="trailing" secondItem="FQf-hf-fYl" secondAttribute="trailing" id="Ke1-SR-NDe"/>
                             <constraint firstAttribute="trailing" secondItem="91d-ag-iEc" secondAttribute="trailing" id="Su9-Jd-7U1"/>
                             <constraint firstItem="Th2-12-lgy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="UTX-1C-YdN"/>
@@ -67,7 +68,6 @@
                             <constraint firstItem="Th2-12-lgy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hLg-qo-bKm"/>
                             <constraint firstItem="Th2-12-lgy" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ohz-Hp-nvZ"/>
                             <constraint firstItem="Th2-12-lgy" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.075" id="tSE-VP-G5c"/>
-                            <constraint firstItem="91d-ag-iEc" firstAttribute="top" secondItem="Th2-12-lgy" secondAttribute="bottom" id="te1-DL-k00"/>
                             <constraint firstItem="FQf-hf-fYl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vGZ-xP-fvS"/>
                         </constraints>
                     </view>
@@ -112,7 +112,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ns6-CP-Uy1">
-                                <rect key="frame" x="0.0" y="8" width="375" height="128.5"/>
+                                <rect key="frame" x="0.0" y="6" width="375" height="128.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="syl-7P-3UQ">
                                         <rect key="frame" x="24" y="0.0" width="74" height="74"/>
@@ -232,7 +232,7 @@
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="juY-A7-QL9">
-                                <rect key="frame" x="0.0" y="136.5" width="375" height="29"/>
+                                <rect key="frame" x="0.0" y="134.5" width="375" height="29"/>
                                 <segments>
                                     <segment title="Match Stats"/>
                                     <segment title="Line Ups"/>
@@ -242,13 +242,13 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIa-Z9-z1D">
-                                <rect key="frame" x="0.0" y="167" width="375" height="391"/>
+                                <rect key="frame" x="0.0" y="165" width="375" height="393"/>
                                 <connections>
                                     <segue destination="B5U-su-5fU" kind="embed" identifier="ShowMatchStatsBars" id="0kV-XO-w77"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdX-20-aDZ">
-                                <rect key="frame" x="0.0" y="167" width="375" height="391"/>
+                                <rect key="frame" x="0.0" y="165" width="375" height="393"/>
                                 <connections>
                                     <segue destination="aw3-zt-jug" kind="embed" identifier="ShowLineUps" id="8h9-Yz-zmB"/>
                                 </connections>
@@ -270,7 +270,7 @@
                             <constraint firstItem="Ns6-CP-Uy1" firstAttribute="centerX" secondItem="lCt-iz-5mp" secondAttribute="centerX" id="mV8-rY-ggd"/>
                             <constraint firstItem="gIa-Z9-z1D" firstAttribute="leading" secondItem="lCt-iz-5mp" secondAttribute="leading" id="ods-ju-06Q"/>
                             <constraint firstAttribute="trailing" secondItem="gIa-Z9-z1D" secondAttribute="trailing" id="u5b-lB-Zen"/>
-                            <constraint firstItem="Ns6-CP-Uy1" firstAttribute="top" secondItem="seH-EW-xQG" secondAttribute="bottom" constant="8" id="w7Z-3W-JXp"/>
+                            <constraint firstItem="Ns6-CP-Uy1" firstAttribute="top" secondItem="seH-EW-xQG" secondAttribute="bottom" constant="6" id="w7Z-3W-JXp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -367,11 +367,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Amx-UB-9sE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QwU-rY-lDz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="391"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="393"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="fnQ-Kx-RUX">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="391"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="393"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MatchStatsCell" id="ODl-30-KTb" customClass="MatchStatsTableViewCell" customModule="iOSMatchCentre" customModuleProvider="target">
@@ -454,11 +454,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Avx-vb-uQS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5ty-HK-32F">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="391"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="393"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="4xN-Ny-YsD">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="391"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="393"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LineUpCell" id="azL-Do-zEQ" customClass="LineUpsTableViewCell" customModule="iOSMatchCentre" customModuleProvider="target">

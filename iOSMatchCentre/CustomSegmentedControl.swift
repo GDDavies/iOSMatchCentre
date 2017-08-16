@@ -26,19 +26,19 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    var textColour: UIColor = Theme.primaryTeamColour {
+    var textColour: UIColor = Theme.secondaryTeamColour {
         didSet {
             updateView()
         }
     }
 
-    var selectorColour: UIColor = Theme.primaryTeamColour {
+    var selectorColour: UIColor = Theme.secondaryTeamColour {
         didSet {
             updateView()
         }
     }
     
-    var selectorTextColour: UIColor = .white {
+    var selectorTextColour: UIColor = Theme.primaryTeamColour {
         didSet {
             updateView()
         }
@@ -48,12 +48,14 @@ class CustomSegmentedControl: UIControl {
         buttons.removeAll()
         subviews.forEach { $0.removeFromSuperview() }
         
+        self.backgroundColor = Theme.primaryTeamColour
+        
         let buttonTitles = commaSeparatedButtonTitles.components(separatedBy: ",")
         
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
-            button.setTitleColor(Theme.primaryTeamColour, for: .normal)
+            button.setTitleColor(Theme.secondaryTeamColour, for: .normal)
             button.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
             buttons.append(button)
         }
@@ -61,9 +63,10 @@ class CustomSegmentedControl: UIControl {
         buttons[0].setTitleColor(selectorTextColour, for: .normal)
         
         let selectorWidth = UIScreen.main.bounds.width / CGFloat(buttons.count)
-        selector = UIView(frame: CGRect(x: 0.0, y: 0.0, width: selectorWidth, height: frame.height))
+        let selectorHeight = UIScreen.main.bounds.height * 0.07
+        selector = UIView(frame: CGRect(x: 0.0, y: 0.0, width: selectorWidth, height: selectorHeight))
         //selector.layer.cornerRadius = frame.height / 2
-        selector.backgroundColor = Theme.primaryTeamColour
+        selector.backgroundColor = Theme.secondaryTeamColour
         addSubview(selector)
         
         let stackView = UIStackView(arrangedSubviews: buttons)
@@ -85,7 +88,7 @@ class CustomSegmentedControl: UIControl {
     
     func buttonTapped(button: UIButton) {
         for (buttonIndex, btn) in buttons.enumerated() {
-            btn.setTitleColor(Theme.primaryTeamColour, for: .normal)
+            btn.setTitleColor(Theme.secondaryTeamColour, for: .normal)
             
             if btn == button {
                 selectedButtonIndex = buttonIndex
