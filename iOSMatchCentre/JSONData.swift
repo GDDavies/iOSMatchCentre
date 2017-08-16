@@ -22,6 +22,7 @@ class MatchJSONData: NSObject {
     var venue: String?
     var attendance: String?
     var referee: String?
+    var date: String?
     var homeTeamName: String?
     var awayTeamName: String?
     var homeTeamScore: String?
@@ -66,6 +67,14 @@ class MatchJSONData: NSObject {
         }
         if let refereeName = MatchJSONData.sharedInstance.matchStatsJSON?["referee"] {
             referee = "Ref: " + String(describing: refereeName)
+        }
+        if let timeStamp = MatchJSONData.sharedInstance.matchStatsJSON?["timestamp"] {
+            let epochTime = TimeInterval(timeStamp as! Double) / 1000
+            let unformattedDate = NSDate(timeIntervalSince1970: epochTime)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/YYYY"
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            date = dateFormatter.string(from: unformattedDate as Date)
         }
         if let homeTeam = MatchJSONData.sharedInstance.matchStatsJSON?["home"] as? NSDictionary {
             if let homeTeamNameText = homeTeam["name"] {

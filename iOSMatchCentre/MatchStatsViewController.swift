@@ -22,6 +22,7 @@ class MatchStatsViewController: UIViewController {
     @IBOutlet weak var venueLabel: UILabel!
     @IBOutlet weak var attendanceLabel: UILabel!
     @IBOutlet weak var refereeLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     @IBOutlet weak var containerViewA: UIView!
     @IBOutlet weak var containerViewC: UIView!
@@ -56,6 +57,7 @@ class MatchStatsViewController: UIViewController {
         venueLabel.text = MatchJSONData.sharedInstance.venue
         attendanceLabel.text = MatchJSONData.sharedInstance.attendance
         refereeLabel.text = MatchJSONData.sharedInstance.referee
+        dateLabel.text = MatchJSONData.sharedInstance.date
         homeTeamName.text = MatchJSONData.sharedInstance.homeTeamName
         awayTeamName.text = MatchJSONData.sharedInstance.awayTeamName
         homeTeamScore.text = MatchJSONData.sharedInstance.homeTeamScore
