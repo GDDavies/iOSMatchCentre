@@ -86,15 +86,30 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return eventTimes[section]
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return eventTimes[section]
+//    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if eventTimes[section] == "" {
             return 8.0
         } else {
-            return 20.0
+            return 15.0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.width, height: 20)))
+        var y = -10
+        if section == 0 {
+            y = 8
+        }
+        let label = UILabel(frame: CGRect(x: 10, y: y, width: Int(self.view.frame.width), height: 20))
+        label.text = eventTimes[section]
+        label.font = UIFont(name: "DroidSans-Bold", size: 14.0)
+        label.textAlignment = .left
+        headerView.addSubview(label)
+        
+        return headerView
     }
 }

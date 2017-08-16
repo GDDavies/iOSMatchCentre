@@ -20,7 +20,7 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    var commaSeparatedButtonTitles: String = "Match Stats,Line Ups" {
+    var buttonTitles = ["Match Stats","Match Commentary"] {
         didSet {
             updateView()
         }
@@ -50,12 +50,11 @@ class CustomSegmentedControl: UIControl {
         
         self.backgroundColor = Theme.primaryTeamColour
         
-        let buttonTitles = commaSeparatedButtonTitles.components(separatedBy: ",")
-        
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
             button.setTitleColor(Theme.secondaryTeamColour, for: .normal)
+            button.titleLabel?.font = UIFont(name: "DroidSans", size: 15.0)
             button.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
             buttons.append(button)
         }

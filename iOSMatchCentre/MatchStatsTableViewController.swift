@@ -162,7 +162,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         }
         let label = UILabel(frame: CGRect(x: 0, y: y, width: Int(self.view.frame.width), height: 20))
         label.text = sectionHeaders[section]
-        label.font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightBold)
+        label.font = UIFont(name: "DroidSans-Bold", size: 14.0)
         label.textAlignment = .center
         headerView.addSubview(label)
         
