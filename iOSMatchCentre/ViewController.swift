@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         MatchJSONData.sharedInstance.getMatchStatsData()
         CommentaryJSONData.sharedInstance.getMatchCommentaryData()
         
-        addOverlay()
+        addOverlay()        
     }
 
     override func didReceiveMemoryWarning() {

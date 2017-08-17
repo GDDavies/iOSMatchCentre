@@ -82,14 +82,14 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         let sum = homeInput + awayInput
         var width:CGFloat = 0.0
         
-        if homeInput == 0 && awayInput == 0 {
+        switch (homeInput, awayInput) {
+        case (0, 0):
             width = 0.5
-        } else if homeInput == 0 {
+        case (0, _):
             width = 0.0
-        } else if awayInput == 0 {
+        case (_, 0):
             width = 1.0
-        } else {
-
+        default:
             width = CGFloat(homeInput / sum)
         }
         return width
