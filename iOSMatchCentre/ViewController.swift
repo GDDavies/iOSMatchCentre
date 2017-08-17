@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.bringContainerViewAToFront()
         
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Theme.secondaryTeamColour]
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Theme.secondaryTeamColour, NSFontAttributeName: UIFont(name: "DroidSans-Bold", size: 20)!]
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.barTintColor = Theme.primaryTeamColour

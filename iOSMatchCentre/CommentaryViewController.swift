@@ -12,10 +12,7 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
     
     @IBOutlet weak var tableView: UITableView!
     
-    var eventTypes = [String]()
-    var eventTimes = [String]()
-    var eventHeadings = [String]()
-    var eventDescriptions = [String]()
+    var matchEvents = [MatchEvent]()
     
     var refreshControl: UIRefreshControl!
     
@@ -56,10 +53,13 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
             // Loop through array and assign each value to array
             for i in 0..<commentaryData.count {
                 if let matchEvent = commentaryData[i] as? NSDictionary {
-                    eventTypes.append(matchEvent["type"] as! String)
-                    eventTimes.append(matchEvent["time"] as! String)
-                    eventHeadings.append(matchEvent["heading"] as! String)
-                    eventDescriptions.append(matchEvent["description"] as! String)
+                    let newMatchEvents = MatchEvent()
+                    newMatchEvents.eventType = matchEvent["type"] as? String
+                    newMatchEvents.eventTime = matchEvent["time"] as? String
+                    newMatchEvents.eventHeading = matchEvent["heading"] as? String
+                    newMatchEvents.eventDescription = matchEvent["description"] as? String
+                    
+                    matchEvents.append(newMatchEvents)
                 }
             }
         }
@@ -72,7 +72,7 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
     
     // MARK: - TableView Methods
     func numberOfSections(in tableView: UITableView) -> Int {
-        return eventDescriptions.count
+        return matchEvents.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,7 +81,7 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentaryCell", for: indexPath) as! CommentaryTableViewCell
-        cell.commentaryLabel?.text = eventDescriptions[indexPath.section]
+        cell.commentaryLabel?.text = matchEvents[indexPath.section].eventDescription
         //cell.layoutMargins.top = 10.0
         return cell
     }
@@ -91,7 +91,7 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
 //    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if eventTimes[section] == "" {
+        if matchEvents[section].eventTime == "" {
             return 8.0
         } else {
             return 15.0
@@ -105,7 +105,7 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
             y = 8
         }
         let label = UILabel(frame: CGRect(x: 10, y: y, width: Int(self.view.frame.width), height: 20))
-        label.text = eventTimes[section]
+        label.text = matchEvents[section].eventTime
         label.font = UIFont(name: "DroidSans-Bold", size: 14.0)
         label.textAlignment = .left
         headerView.addSubview(label)
