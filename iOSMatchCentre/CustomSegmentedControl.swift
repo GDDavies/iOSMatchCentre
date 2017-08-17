@@ -20,13 +20,15 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    var buttonTitles = ["Match Stats","Match Commentary"] {
+    var buttonTitles = ["Match Info","Match Commentary"] {
         didSet {
             updateView()
         }
     }
     
-    var textColour: UIColor = Theme.secondaryTeamColour {
+    var newTextColour = UIColor.white
+    
+    var textColour: UIColor = UIColor.white {
         didSet {
             updateView()
         }
@@ -44,7 +46,7 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    func updateView() {
+    public func updateView() {
         buttons.removeAll()
         subviews.forEach { $0.removeFromSuperview() }
         
@@ -53,7 +55,7 @@ class CustomSegmentedControl: UIControl {
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
-            button.setTitleColor(Theme.secondaryTeamColour, for: .normal)
+            button.setTitleColor(newTextColour, for: .normal)
             button.titleLabel?.font = UIFont(name: "DroidSans", size: 15.0)
             button.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
             buttons.append(button)
@@ -87,7 +89,7 @@ class CustomSegmentedControl: UIControl {
     
     func buttonTapped(button: UIButton) {
         for (buttonIndex, btn) in buttons.enumerated() {
-            btn.setTitleColor(Theme.secondaryTeamColour, for: .normal)
+            btn.setTitleColor(newTextColour, for: .normal)
             
             if btn == button {
                 selectedButtonIndex = buttonIndex
@@ -95,11 +97,9 @@ class CustomSegmentedControl: UIControl {
                 UIView.animate(withDuration: 0.3, animations: { 
                     self.selector.frame.origin.x = selectorStartPosition
                 })
-                
                 btn.setTitleColor(selectorTextColour, for: .normal)
             }
         }
-        
         sendActions(for: .valueChanged)
     }
 }

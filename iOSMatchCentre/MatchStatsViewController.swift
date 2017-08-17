@@ -18,7 +18,7 @@ class MatchStatsViewController: UIViewController {
     @IBOutlet weak var awayTeamName: UILabel!
     @IBOutlet weak var awayTeamScore: UILabel!
     
-    @IBOutlet weak var competitionNameLabel: UILabel!
+    @IBOutlet weak var competitionImageView: UIImageView!
     @IBOutlet weak var venueLabel: UILabel!
     @IBOutlet weak var attendanceLabel: UILabel!
     @IBOutlet weak var refereeLabel: UILabel!
@@ -27,15 +27,13 @@ class MatchStatsViewController: UIViewController {
     @IBOutlet weak var containerViewA: UIView!
     @IBOutlet weak var containerViewC: UIView!
     
-    var homeID: String?
-    var awayID: String?
+    @IBOutlet weak var customSegment: CustomSegmentedControl!
     
-    @IBOutlet weak var segmentControl: UISegmentedControl!
-    
-    @IBAction func matchStatsSegmentedControl(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+    @IBAction func customSegmentControl(_ sender: CustomSegmentedControl) {
+        
+        if sender.selectedButtonIndex == 0 {
             self.view.addSubview(containerViewA)
-        } else if sender.selectedSegmentIndex == 1 {
+        } else {
             self.view.addSubview(containerViewC)
         }
     }
@@ -44,6 +42,12 @@ class MatchStatsViewController: UIViewController {
         super.viewDidLoad()
         self.view.addSubview(containerViewA)
         NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsViewController.populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+        
+        customSegment.buttonTitles = ["Stats","Line Ups"]
+        customSegment.backgroundColor = Theme.primaryTeamColour
+        customSegment.selector.backgroundColor = UIColor(red: 240/255, green: 239/255, blue: 245/255, alpha: 1)
+        customSegment.newTextColour = UIColor.white
+        //customSegment.updateView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,7 +57,7 @@ class MatchStatsViewController: UIViewController {
     // MARK: - Setup Match Stats Data
     
     func populateMatchStatsData() {
-        competitionNameLabel.text = MatchJSONData.sharedInstance.competition
+        //competitionNameLabel.text = MatchJSONData.sharedInstance.competition
         venueLabel.text = MatchJSONData.sharedInstance.venue
         attendanceLabel.text = MatchJSONData.sharedInstance.attendance
         refereeLabel.text = MatchJSONData.sharedInstance.referee
@@ -67,8 +71,10 @@ class MatchStatsViewController: UIViewController {
     }
     
     func loadLogos() {
+        // WHAT IF WE DON'T HAVE THE IMAGE?
         self.homeTeamLogo.image = UIImage(named: "\(String(describing: MatchJSONData.sharedInstance.homeTeamName!)).png")
         self.awayTeamLogo.image = UIImage(named: "\(String(describing: MatchJSONData.sharedInstance.awayTeamName!)).png")
+        self.competitionImageView.image = UIImage(named: "\(String(describing: MatchJSONData.sharedInstance.competition!)).png")
     }
 
 
