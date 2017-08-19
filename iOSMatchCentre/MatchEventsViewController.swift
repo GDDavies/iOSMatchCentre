@@ -48,8 +48,7 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             cell.homeEventDescription.text = "Goal! Billy Sharp"
             cell.awayEventTime.isHidden = true
             cell.awayEventDescription.isHidden = true
-//            cell.dividerViewHeightConstraint.constant = cell.bounds.height / 2
-//            cell.dividerViewTopConstraint.constant = cell.bounds.height / 2
+            cell.dividerViewTopConstraint.constant = cell.bounds.height / 2
         case 1:
             cell.eventImage.image = UIImage(named: "substitution.png")
             cell.awayEventTime.text = "80'"
@@ -68,8 +67,7 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             cell.awayEventDescription.text = "Booking. Paddy Kenny"
             cell.homeEventTime.isHidden = true
             cell.homeEventDescription.isHidden = true
-//            cell.dividerViewBottomConstraint.constant = cell.bounds.height / 2
-//            cell.dividerViewHeightConstraint.constant = cell.bounds.height / 2
+            cell.dividerViewBottomConstraint.constant = cell.bounds.height / 2
         default:
             cell.eventImage.image = UIImage(named: "goal.png")
         }

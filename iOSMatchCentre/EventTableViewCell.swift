@@ -19,7 +19,6 @@ class EventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dividerView: UIView!
     
-    @IBOutlet weak var dividerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dividerViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var dividerViewBottomConstraint: NSLayoutConstraint!
     
