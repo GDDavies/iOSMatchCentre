@@ -12,7 +12,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
 
     @IBOutlet weak var matchStatsTableView: UITableView!
     
-    let sectionHeaders = ["Half Time Score","Possession","Shots","Shots on Target","Corners","Fouls","Yellow Cards","Red Cards"]
+    let sectionHeaders = ["Half Time Score","Possession (%)","Shots","Shots on Target","Corners","Fouls","Yellow Cards","Red Cards"]
     
     var homeTeamStatsArray = [Double]()
     var awayTeamStatsArray = [Double]()
@@ -31,7 +31,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
     func populateMatchStatsData() {
         
         if let homeMatchStats = MatchJSONData.sharedInstance.matchStatsJSON?["homeStats"] as? NSDictionary {
-        homeTeamStatsArray = returnMatchStatsData(teamStats: homeMatchStats)
+            homeTeamStatsArray = returnMatchStatsData(teamStats: homeMatchStats)
         }
         
         if let awayMatchStats = MatchJSONData.sharedInstance.matchStatsJSON?["awayStats"] as? NSDictionary {
@@ -126,8 +126,6 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
             let homeStatsWidth = createHomePercentage(homeInput: homeTeamStatsArray[indexPath.section], awayInput: awayTeamStatsArray[indexPath.section], index: indexPath.section)
         
             homeStatsShapeLayer.frame = CGRect(x: awayStatsBounds.origin.x, y: awayStatsBounds.origin.y, width: awayStatsBounds.width * homeStatsWidth, height: awayStatsBounds.height)
-            //homeStatsShapeLayer.cornerRadius = cell.awayStatsView.frame.height / 2
-
             
             cell.homeStatLabel.text = formatter.string(from: NSNumber(value: homeTeamStatsArray[indexPath.section]))
             cell.awayStatLabel.text = formatter.string(from: NSNumber(value: awayTeamStatsArray[indexPath.section]))

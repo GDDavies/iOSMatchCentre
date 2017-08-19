@@ -26,6 +26,7 @@ class MatchStatsViewController: UIViewController {
     
     @IBOutlet weak var containerViewA: UIView!
     @IBOutlet weak var containerViewC: UIView!
+    @IBOutlet weak var matchEventsContainerView: UIView!
     
     @IBOutlet weak var customSegment: CustomSegmentedControl!
     
@@ -33,8 +34,10 @@ class MatchStatsViewController: UIViewController {
         
         if sender.selectedButtonIndex == 0 {
             self.view.addSubview(containerViewA)
-        } else {
+        } else if sender.selectedButtonIndex == 1 {
             self.view.addSubview(containerViewC)
+        } else {
+            self.view.addSubview(matchEventsContainerView)
         }
     }
     
@@ -43,7 +46,7 @@ class MatchStatsViewController: UIViewController {
         self.view.addSubview(containerViewA)
         NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsViewController.populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
         
-        customSegment.buttonTitles = ["Stats","Line Ups"]
+        customSegment.buttonTitles = ["Stats","Line Ups","Events"]
         customSegment.backgroundColor = Theme.primaryTeamColour
         customSegment.selector.backgroundColor = UIColor(red: 240/255, green: 239/255, blue: 245/255, alpha: 1)
         customSegment.newTextColour = UIColor.white
