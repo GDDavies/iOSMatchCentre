@@ -10,15 +10,29 @@ import UIKit
 
 class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var matchEventsArray = [MatchEvent]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(MatchEventsViewController.getMatchEventsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getMatchEventsData() {
+        for event in MatchJSONData.sharedInstance.matchEventsArray {
+            let newEvent = MatchEvent()
+            newEvent.type = event?["type"] as? String
+            newEvent.when = event?["when"] as? String
+            newEvent.whom = event?["whom"] as? String
+            newEvent.isHome = event?["isHome"] as? Bool
+            newEvent.subOn = event?["subOn"] as? String
+            newEvent.subOff = event?["subOff"] as? String
+            print(newEvent.subOn)
+        }
     }
     
     /*
