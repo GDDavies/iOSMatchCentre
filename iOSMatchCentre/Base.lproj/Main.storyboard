@@ -179,7 +179,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attendance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ClM-vS-rUe">
-                                        <rect key="frame" x="157" y="103.5" width="61.5" height="14"/>
+                                        <rect key="frame" x="157" y="103.5" width="62" height="14"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="DroidSans" family="Droid Sans" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -571,6 +571,10 @@
         <scene sceneID="gPY-gB-HYX">
             <objects>
                 <viewController id="a8d-KU-SNS" customClass="MatchEventsViewController" customModule="iOSMatchCentre" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nLF-SQ-bME"/>
+                        <viewControllerLayoutGuide type="bottom" id="epf-3G-26D"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jXA-cy-Ca3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="401"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -676,6 +680,9 @@
                             <constraint firstAttribute="bottom" secondItem="7vB-R4-WG5" secondAttribute="bottom" id="Z1d-4T-94e"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="matchEventsTableView" destination="7vB-R4-WG5" id="cjH-YC-ZyN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ody-La-Rzx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

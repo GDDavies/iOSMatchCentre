@@ -11,6 +11,7 @@ import UIKit
 class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var matchEventsArray = [MatchEvent]()
+    @IBOutlet weak var matchEventsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +32,9 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             newEvent.isHome = event?["isHome"] as? Bool
             newEvent.subOn = event?["subOn"] as? String
             newEvent.subOff = event?["subOff"] as? String
-            print(newEvent.subOn)
+            matchEventsArray.append(newEvent)
         }
+        matchEventsTableView.reloadData()
     }
     
     /*
@@ -50,41 +52,59 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        print(matchEventsArray.count)
+        return matchEventsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MatchEventCell", for: indexPath) as! EventTableViewCell
-        switch indexPath.row {
-        case 0:
-            cell.eventImage.image = UIImage(named: "goal.png")
-            cell.homeEventTime.text = "90'"
-            cell.homeEventDescription.text = "Goal! Billy Sharp"
-            cell.awayEventTime.isHidden = true
-            cell.awayEventDescription.isHidden = true
-            cell.dividerViewTopConstraint.constant = cell.bounds.height / 2
-        case 1:
-            cell.eventImage.image = UIImage(named: "substitution.png")
-            cell.awayEventTime.text = "80'"
-            cell.awayEventDescription.text = "Substitution. Billy Sharp for Ched Evans"
-            cell.homeEventTime.isHidden = true
-            cell.homeEventDescription.isHidden = true
-        case 2:
+        
+        if indexPath.row == 0 {
             cell.eventImage.image = UIImage(named: "whistle.png")
-            cell.homeEventTime.text = "40'"
-            cell.homeEventDescription.text = "Foul"
-            cell.awayEventTime.isHidden = true
-            cell.awayEventDescription.isHidden = true
-        case 3:
-            cell.eventImage.image = UIImage(named: "booking.png")
-            cell.awayEventTime.text = "55'"
-            cell.awayEventDescription.text = "Booking. Paddy Kenny"
-            cell.homeEventTime.isHidden = true
-            cell.homeEventDescription.isHidden = true
+            cell.dividerViewTopConstraint.constant = cell.bounds.height / 2
+        } else if indexPath.row == matchEventsArray.count - 1 {
+            cell.eventImage.image = UIImage(named: "whistle.png")
             cell.dividerViewBottomConstraint.constant = cell.bounds.height / 2
-        default:
-            cell.eventImage.image = UIImage(named: "goal.png")
+        } else {
+            if let isHomeEvent = matchEventsArray[indexPath.row].isHome {
+                if isHomeEvent {
+                    cell.eventImage.image = UIImage(named: "\(String(describing: matchEventsArray[indexPath.row].type)).png")
+                    cell.homeEventTime.text = matchEventsArray[indexPath.row].when
+                    cell.homeEventDescription.text = matchEventsArray[indexPath.row].type
+                }
+            }
         }
+//        
+//        switch indexPath.row {
+//        case 0:
+//            cell.eventImage.image = UIImage(named: "goal.png")
+//            cell.homeEventTime.text = "90'"
+//            cell.homeEventDescription.text = "Goal! Billy Sharp"
+//            cell.awayEventTime.isHidden = true
+//            cell.awayEventDescription.isHidden = true
+//            cell.dividerViewTopConstraint.constant = cell.bounds.height / 2
+//        case 1:
+//            cell.eventImage.image = UIImage(named: "substitution.png")
+//            cell.awayEventTime.text = "80'"
+//            cell.awayEventDescription.text = "Substitution. Billy Sharp for Ched Evans"
+//            cell.homeEventTime.isHidden = true
+//            cell.homeEventDescription.isHidden = true
+//        case 2:
+//            cell.eventImage.image = UIImage(named: "whistle.png")
+//            cell.homeEventTime.text = "40'"
+//            cell.homeEventDescription.text = "Foul"
+//            cell.awayEventTime.isHidden = true
+//            cell.awayEventDescription.isHidden = true
+//        case 3:
+//            cell.eventImage.image = UIImage(named: "booking.png")
+//            cell.awayEventTime.text = "55'"
+//            cell.awayEventDescription.text = "Booking. Paddy Kenny"
+//            cell.homeEventTime.isHidden = true
+//            cell.homeEventDescription.isHidden = true
+//            cell.dividerViewBottomConstraint.constant = cell.bounds.height / 2
+//        default:
+//            cell.eventImage.image = UIImage(named: "goal.png")
+//        }
         //cell.dividerView.layoutIfNeeded()
         return cell
     }
