@@ -12,7 +12,7 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
     
     @IBOutlet weak var tableView: UITableView!
     
-    var matchEvents = [MatchEvent]()
+    var matchEvents = [CommentaryEvent]()
     
     var refreshControl: UIRefreshControl!
     
@@ -52,14 +52,14 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
         if let commentaryData = CommentaryJSONData.sharedInstance.commentaryJSON {
             // Loop through array and assign each value to array
             for i in 0..<commentaryData.count {
-                if let matchEvent = commentaryData[i] as? NSDictionary {
-                    let newMatchEvents = MatchEvent()
-                    newMatchEvents.eventType = matchEvent["type"] as? String
-                    newMatchEvents.eventTime = matchEvent["time"] as? String
-                    newMatchEvents.eventHeading = matchEvent["heading"] as? String
-                    newMatchEvents.eventDescription = matchEvent["description"] as? String
+                if let commentaryEvent = commentaryData[i] as? NSDictionary {
+                    let newCommentaryEvents = CommentaryEvent()
+                    newCommentaryEvents.eventType = commentaryEvent["type"] as? String
+                    newCommentaryEvents.eventTime = commentaryEvent["time"] as? String
+                    newCommentaryEvents.eventHeading = commentaryEvent["heading"] as? String
+                    newCommentaryEvents.eventDescription = commentaryEvent["description"] as? String
                     
-                    matchEvents.append(newMatchEvents)
+                    matchEvents.append(newCommentaryEvents)
                 }
             }
         }

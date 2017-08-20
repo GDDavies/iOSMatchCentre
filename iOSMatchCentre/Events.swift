@@ -9,11 +9,19 @@
 import Foundation
 //import UIKit
 
-class MatchEvent: NSObject {
+class CommentaryEvent: NSObject {
     
     var eventType: String?
     var eventTime: String?
     var eventHeading: String?
     var eventDescription: String?
+}
 
+class MatchEvent: NSObject {
+    var type: String?
+    var when: String?
+    var whom: String?
+    var isHome: Bool?
+    var subOn: String?
+    var subOff: String?
 }

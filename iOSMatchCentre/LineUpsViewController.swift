@@ -12,27 +12,14 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var lineUpTableView: UITableView!
     
-    var homePlayerName = [String?]()
-    var homePlayerNumber = [Int?]()
-    var homeFormationPlace = [Int?]()
-    
-    var homeSubPlayerName = [String?]()
-    var homeSubPlayerNumber = [Int?]()
-    
-    var awayPlayerName = [String?]()
-    var awayPlayerNumber = [Int?]()
-    var awayFormationPlace = [Int?]()
-    
-    var awaySubPlayerName = [String?]()
-    var awaySubPlayerNumber = [Int?]()
-    
+    var startingPlayers = [StartingPlayer]()
+    var benchPlayers = [BenchPlayer]()
     let sectionHeaders = ["Starting XI","Substitutes"]
+    let numStartingPlayers = 11
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        getMatchLineUpsData()
-        //lineUpTableView.estimatedRowHeight = 30.0
+        NotificationCenter.default.addObserver(self, selector: #selector(LineUpsViewController.lineUpMatchData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
         lineUpTableView.rowHeight = UITableViewAutomaticDimension
     }
 
@@ -41,86 +28,55 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    // Retreive all match stats data from JSON feed
-    func getMatchLineUpsData() {
-        let url = URL(string: "https://feeds.tribehive.co.uk/DigitalStadiumServer/opta?pageType=match&value=803294&v=5")
+    func lineUpMatchData() {
         
-        let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            DispatchQueue.main.async(execute: {
-                if let unwrappedData = data {
-                    // If successful pass data object to populate function
-                    self.lineUpMatchData(unwrappedData)
-                } else {
-                    // Error popup
-                    print("Unable to retrieve data")
-                }
-            })
-        })
-        task.resume()
-    }
-    
-    func lineUpMatchData(_ matchLineUpData: Data) {
-        do {
-            // Create diciotnary from JSON data object
-            let json = try JSONSerialization.jsonObject(with: matchLineUpData, options: []) as! NSDictionary
-            
-            if let homeTeam = json["home"] as? NSDictionary {
-                if let team = homeTeam["team"] as? NSArray {
-                        for i in 0..<10 {
-                            if let lineUpData = team[i] as? NSDictionary {
-                                let name = lineUpData["name"] as? String
-                                let number = lineUpData["number"] as? Int
-                                let place = lineUpData["formationPlace"] as? Int
-
-                                homePlayerName.append(name)
-                                homePlayerNumber.append(number)
-                                homeFormationPlace.append(place)
-                            }
-                        }
-                        for i in 11..<team.count {
-                            if let lineUpData = team[i] as? NSDictionary {
-                                let name = lineUpData["name"] as? String
-                                let number = lineUpData["number"] as? Int
-                                
-                                homeSubPlayerName.append(name)
-                                homeSubPlayerNumber.append(number)
-                            }
-                        }
+        if let homeTeam = MatchJSONData.sharedInstance.homeTeamPlayers as? NSArray {
+                for i in 0..<numStartingPlayers {
+                    if let lineUpData = homeTeam[i] as? NSDictionary {
+                        let newPlayer = StartingPlayer()
+                        newPlayer.playerName = lineUpData["name"] as? String
+                        newPlayer.playerNumber = lineUpData["number"] as? Int
+                        newPlayer.formationPlace = lineUpData["formationPlace"] as? Int
+                        newPlayer.isHomePlayer = true
+                        startingPlayers.append(newPlayer)
                     }
                 }
-            
-            if let awayTeam = json["away"] as? NSDictionary {
-                if let team = awayTeam["team"] as? NSArray {
-                    for i in 0..<10 {
-                        if let lineUpData = team[i] as? NSDictionary {
-                            let name = lineUpData["name"] as? String
-                            let number = lineUpData["number"] as? Int
-                            let place = lineUpData["formationPlace"] as? Int
-                            
-                            awayPlayerName.append(name)
-                            awayPlayerNumber.append(number)
-                            awayFormationPlace.append(place)
-                        }
-                    }
-                    for i in 11..<team.count {
-                        if let lineUpData = team[i] as? NSDictionary {
-                            let name = lineUpData["name"] as? String
-                            let number = lineUpData["number"] as? Int
-                            
-                            awaySubPlayerName.append(name)
-                            awaySubPlayerNumber.append(number)
-                        }
+                for i in numStartingPlayers..<homeTeam.count {
+                    if let lineUpData = homeTeam[i] as? NSDictionary {
+                        let newBenchPlayer = BenchPlayer()
+                        newBenchPlayer.playerName = lineUpData["name"] as? String
+                        newBenchPlayer.playerNumber = lineUpData["number"] as? Int
+                        newBenchPlayer.isHomePlayer = true
+                        benchPlayers.append(newBenchPlayer)
                     }
                 }
             }
-
-
-            // Reload view once all JSON data is loaded
-            lineUpTableView.reloadData()
-        } catch {
-            // Error popup
-            print("Error fetching data")
+        
+        if let awayTeam = MatchJSONData.sharedInstance.awayTeamPlayers as? NSArray {
+            for i in 0..<numStartingPlayers {
+                if let lineUpData = awayTeam[i] as? NSDictionary {
+                    let newPlayer = StartingPlayer()
+                    newPlayer.playerName = lineUpData["name"] as? String
+                    newPlayer.playerNumber = lineUpData["number"] as? Int
+                    newPlayer.formationPlace = lineUpData["formationPlace"] as? Int
+                    newPlayer.isHomePlayer = false
+                    
+                    startingPlayers.append(newPlayer)
+                }
+            }
+            for i in numStartingPlayers..<awayTeam.count {
+                if let lineUpData = awayTeam[i] as? NSDictionary {
+                    let newBenchPlayer = BenchPlayer()
+                    newBenchPlayer.playerName = lineUpData["name"] as? String
+                    newBenchPlayer.playerNumber = lineUpData["number"] as? Int
+                    newBenchPlayer.isHomePlayer = false
+                    
+                    benchPlayers.append(newBenchPlayer)
+                }
+            }
         }
+        // Reload view once all JSON data is loaded
+        lineUpTableView.reloadData()
     }
 
     /*
@@ -139,27 +95,28 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return homePlayerName.count
+            return numStartingPlayers
         } else {
-            return homeSubPlayerName.count
+            return benchPlayers.count / 2
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LineUpCell") as! LineUpsTableViewCell
         
-        if indexPath.section == 0 {
-            cell.homePlayerNameLabel.text = homePlayerName[indexPath.row]
-            cell.homePlayerNumberLabel.text = String(describing: homePlayerNumber[indexPath.row]!)
-            cell.awayPlayerNameLabel.text = awayPlayerName[indexPath.row]
-            cell.awayPlayerNumberLabel.text = String(describing: awayPlayerNumber[indexPath.row]!)
-        } else {
-            cell.homePlayerNameLabel.text = homeSubPlayerName[indexPath.row]
-            cell.homePlayerNumberLabel.text = String(describing: homeSubPlayerNumber[indexPath.row]!)
-            cell.awayPlayerNameLabel.text = awaySubPlayerName[indexPath.row]
-            cell.awayPlayerNumberLabel.text = String(describing: awaySubPlayerNumber[indexPath.row]!)
+        if !startingPlayers.isEmpty {
+            if indexPath.section == 0 {
+                cell.homePlayerNameLabel.text = startingPlayers[indexPath.row].playerName
+                cell.homePlayerNumberLabel.text = String(describing: startingPlayers[indexPath.row].playerNumber!)
+                cell.awayPlayerNameLabel.text = startingPlayers[indexPath.row + 11].playerName
+                cell.awayPlayerNumberLabel.text = String(describing: startingPlayers[indexPath.row + 11].playerNumber!)
+            } else {
+                cell.homePlayerNameLabel.text = benchPlayers[indexPath.row].playerName
+                cell.homePlayerNumberLabel.text = String(describing: benchPlayers[indexPath.row].playerNumber!)
+                cell.awayPlayerNameLabel.text = benchPlayers[indexPath.row + (benchPlayers.count / 2)].playerName
+                cell.awayPlayerNumberLabel.text = String(describing: benchPlayers[indexPath.row + (benchPlayers.count / 2)].playerNumber!)
+            }
         }
-        
         return cell
     }
     

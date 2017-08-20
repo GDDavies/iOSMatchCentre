@@ -17,6 +17,9 @@ class MatchJSONData: NSObject {
     static let sharedInstance = MatchJSONData()
     var matchStatsJSON: NSDictionary?
     var homeTeamStatsDict = [String : Any]()
+    var matchEventsArray = [NSDictionary?]()
+    var homeTeamPlayers = [[String : Any]]()
+    var awayTeamPlayers = [NSDictionary?]()
     
     var competition: String?
     var venue: String?
@@ -68,6 +71,10 @@ class MatchJSONData: NSObject {
         if let refereeName = MatchJSONData.sharedInstance.matchStatsJSON?["referee"] {
             referee = "Ref: " + String(describing: refereeName)
         }
+        if let matchEvents = MatchJSONData.sharedInstance.matchStatsJSON?["events"] {
+            matchEventsArray = matchEvents as! [NSDictionary]
+        }
+        
         if let timeStamp = MatchJSONData.sharedInstance.matchStatsJSON?["timestamp"] {
             let epochTime = TimeInterval(timeStamp as! Double) / 1000
             let unformattedDate = NSDate(timeIntervalSince1970: epochTime)
@@ -80,10 +87,16 @@ class MatchJSONData: NSObject {
             if let homeTeamNameText = homeTeam["name"] {
                 homeTeamName = String(describing: homeTeamNameText)
             }
+            if let homeTeamSquad = homeTeam["team"] {
+                homeTeamPlayers = homeTeamSquad as! [[String : Any]]
+            }
         }
         if let awayTeam = MatchJSONData.sharedInstance.matchStatsJSON?["away"] as? NSDictionary {
             if let awayTeamNameText = awayTeam["name"] {
                 awayTeamName = String(describing: awayTeamNameText)
+            }
+            if let awayTeamSquad = awayTeam["team"] {
+                awayTeamPlayers = awayTeamSquad as! [NSDictionary]
             }
         }
         if let homeTeamStats = MatchJSONData.sharedInstance.matchStatsJSON?["homeStats"] as? NSDictionary {

@@ -9,7 +9,7 @@
 import UIKit
 
 class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,7 +71,7 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
         default:
             cell.eventImage.image = UIImage(named: "goal.png")
         }
-        cell.dividerView.layoutIfNeeded()
+        //cell.dividerView.layoutIfNeeded()
         return cell
     }
 }
