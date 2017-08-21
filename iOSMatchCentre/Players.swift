@@ -11,6 +11,7 @@ import Foundation
 class StartingPlayer: NSObject {
     var playerName: String?
     var playerNumber: Int?
+    var playerPosition: String?
     var formationPlace: Int?
     var isHomePlayer: Bool?
 }

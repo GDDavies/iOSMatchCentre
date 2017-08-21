@@ -129,20 +129,11 @@
 		9313BD521F3CE70F00CCD341 /* iOSMatchCentre */ = {
 			isa = PBXGroup;
 			children = (
-				9313BD531F3CE70F00CCD341 /* AppDelegate.swift */,
-				9313BD551F3CE70F00CCD341 /* ViewController.swift */,
-				93308AFF1F3DCE6C004C2A38 /* Commentary */,
-				93308B001F3DCE7D004C2A38 /* Match Stats */,
-				9356FDF31F421030000DB9AB /* JSONData.swift */,
-				93C980B51F4A1E6C00E99983 /* Players.swift */,
-				936F014C1F458A62009E6AF9 /* Events.swift */,
-				9326EB2C1F3F4E5C003F9FBA /* Theme.swift */,
-				9396C65E1F444C9E0048765F /* CustomSegmentedControl.swift */,
-				9313BD571F3CE70F00CCD341 /* Main.storyboard */,
-				9313BD5A1F3CE70F00CCD341 /* Assets.xcassets */,
-				9313BD5C1F3CE70F00CCD341 /* LaunchScreen.storyboard */,
+				932906731F4AEB030004E4A7 /* Controllers */,
+				932906741F4AEB2A0004E4A7 /* Views */,
+				932906721F4AEAF10004E4A7 /* Model */,
+				932906711F4AEAD80004E4A7 /* Supporting Files */,
 				93F2487D1F44DF7C0076E97A /* Resources */,
-				9313BD5F1F3CE70F00CCD341 /* Info.plist */,
 			);
 			path = iOSMatchCentre;
 			sourceTree = "<group>";
@@ -165,43 +156,52 @@
 			path = iOSMatchCentreUITests;
 			sourceTree = "<group>";
 		};
-		93308AFF1F3DCE6C004C2A38 /* Commentary */ = {
+		932906711F4AEAD80004E4A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */,
-				9356FDF51F42628F000DB9AB /* Custom Cells */,
+				9313BD531F3CE70F00CCD341 /* AppDelegate.swift */,
+				9313BD571F3CE70F00CCD341 /* Main.storyboard */,
+				9313BD5A1F3CE70F00CCD341 /* Assets.xcassets */,
+				9313BD5C1F3CE70F00CCD341 /* LaunchScreen.storyboard */,
+				9313BD5F1F3CE70F00CCD341 /* Info.plist */,
 			);
-			name = Commentary;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		93308B001F3DCE7D004C2A38 /* Match Stats */ = {
+		932906721F4AEAF10004E4A7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9356FDF31F421030000DB9AB /* JSONData.swift */,
+				93C980B51F4A1E6C00E99983 /* Players.swift */,
+				936F014C1F458A62009E6AF9 /* Events.swift */,
+				9326EB2C1F3F4E5C003F9FBA /* Theme.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		932906731F4AEB030004E4A7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9313BD551F3CE70F00CCD341 /* ViewController.swift */,
+				9313BD831F3D0F2900CCD341 /* CommentaryViewController.swift */,
 				93308AFD1F3DCE61004C2A38 /* MatchStatsViewController.swift */,
 				9326AD291F3E621C005B0764 /* MatchStatsTableViewController.swift */,
 				9326EB301F3F7E9B003F9FBA /* LineUpsViewController.swift */,
 				93D840541F48D3CB00E210FE /* MatchEventsViewController.swift */,
-				9356FDF21F41A46B000DB9AB /* Custom Cells */,
 			);
-			name = "Match Stats";
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		9356FDF21F41A46B000DB9AB /* Custom Cells */ = {
-			isa = PBXGroup;
-			children = (
-				9326EB321F3F823E003F9FBA /* LineUpsTableViewCell.swift */,
-				9326AD2B1F3E63E9005B0764 /* MatchStatsTableViewCell.swift */,
-				93D840561F48D64D00E210FE /* EventTableViewCell.swift */,
-			);
-			name = "Custom Cells";
-			sourceTree = "<group>";
-		};
-		9356FDF51F42628F000DB9AB /* Custom Cells */ = {
+		932906741F4AEB2A0004E4A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				93308AFB1F3DBC5E004C2A38 /* CommentaryTableViewCell.swift */,
+				9326EB321F3F823E003F9FBA /* LineUpsTableViewCell.swift */,
+				9326AD2B1F3E63E9005B0764 /* MatchStatsTableViewCell.swift */,
+				93D840561F48D64D00E210FE /* EventTableViewCell.swift */,
+				9396C65E1F444C9E0048765F /* CustomSegmentedControl.swift */,
 			);
-			name = "Custom Cells";
+			name = Views;
 			sourceTree = "<group>";
 		};
 		93F2487D1F44DF7C0076E97A /* Resources */ = {

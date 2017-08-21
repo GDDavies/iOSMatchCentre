@@ -19,7 +19,7 @@ class MatchJSONData: NSObject {
     var homeTeamStatsDict = [String : Any]()
     var matchEventsArray = [NSDictionary?]()
     var homeTeamPlayers = [[String : Any]]()
-    var awayTeamPlayers = [NSDictionary?]()
+    var awayTeamPlayers = [[String : Any]]()
     
     var competition: String?
     var venue: String?
@@ -96,7 +96,7 @@ class MatchJSONData: NSObject {
                 awayTeamName = String(describing: awayTeamNameText)
             }
             if let awayTeamSquad = awayTeam["team"] {
-                awayTeamPlayers = awayTeamSquad as! [NSDictionary]
+                awayTeamPlayers = awayTeamSquad as! [[String : Any]]
             }
         }
         if let homeTeamStats = MatchJSONData.sharedInstance.matchStatsJSON?["homeStats"] as? NSDictionary {
