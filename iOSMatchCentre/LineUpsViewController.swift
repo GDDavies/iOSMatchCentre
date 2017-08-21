@@ -12,13 +12,10 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var lineUpTableView: UITableView!
     
-    var startingPlayers = [StartingPlayer]()
-    var benchPlayers = [BenchPlayer]()
+    var startingPlayers = [Player]()
+    var benchPlayers = [Player]()
     let sectionHeaders = ["Starting XI","Substitutes"]
     let numStartingPlayers = 11
-    
-    var homeTeamPrimaryColour: CGColor?
-    var homeTeamSecondaryColour: CGColor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,46 +31,45 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // Parse lineups from JSON and convert to array of player objects
     func lineUpMatchData() {
+        // Get home team player array
         let homeTeam = MatchJSONData.sharedInstance.homeTeamPlayers
+        // Loop through array for first 11 players
         for i in 0..<numStartingPlayers {
-            let newPlayer = newStartingPlayer(player: homeTeam[i])
-            newPlayer.isHomePlayer = true
+            // Create newPlayer object using dictionary values
+            let newPlayer = returnNewPlayer(player: homeTeam[i], isHome: true, index: i)
+            // Append newPlayer to array
             startingPlayers.append(newPlayer)
         }
+        // Loop through array for remaining players
         for i in numStartingPlayers..<homeTeam.count {
-            let newBenchPlayer = newSubPlayer(player: homeTeam[i])
-            newBenchPlayer.isHomePlayer = true
+            // Create newBenchPlayer object using dictionary values
+            let newBenchPlayer = returnNewPlayer(player: homeTeam[i], isHome: true, index: i)
+            // Append newBenchPlayer to array
             benchPlayers.append(newBenchPlayer)
         }
         let awayTeam = MatchJSONData.sharedInstance.awayTeamPlayers
         for i in 0..<numStartingPlayers {
-            let newPlayer = newStartingPlayer(player: awayTeam[i])
-            newPlayer.isHomePlayer = false
+            let newPlayer = returnNewPlayer(player: awayTeam[i], isHome: false, index: i)
             startingPlayers.append(newPlayer)
         }
         for i in numStartingPlayers..<awayTeam.count {
-            let newBenchPlayer = newSubPlayer(player: awayTeam[i])
-            newBenchPlayer.isHomePlayer = false
+            let newBenchPlayer = returnNewPlayer(player: homeTeam[i], isHome: false, index: i)
             benchPlayers.append(newBenchPlayer)
         }
         // Reload view once all JSON data is loaded
         lineUpTableView.reloadData()
     }
     
-    func newStartingPlayer(player: [String: Any]) -> StartingPlayer {
-        let newPlayer = StartingPlayer()
+    func returnNewPlayer(player: [String: Any], isHome: Bool, index: Int) -> Player {
+        let newPlayer = Player()
         newPlayer.playerName = player["name"] as? String
         newPlayer.playerNumber = player["number"] as? Int
-        newPlayer.playerPosition = player["position"] as? String
-        newPlayer.formationPlace = player["formationPlace"] as? Int
+        if index < 11 {
+            newPlayer.playerPosition = player["position"] as? String
+            newPlayer.formationPlace = player["formationPlace"] as? Int
+        }
+        newPlayer.isHomePlayer = isHome
         return newPlayer
-    }
-    
-    func newSubPlayer(player: [String: Any]) -> BenchPlayer {
-        let newBenchPlayer = BenchPlayer()
-        newBenchPlayer.playerName = player["name"] as? String
-        newBenchPlayer.playerNumber = player["number"] as? Int
-        return newBenchPlayer
     }
     
     func lineUpTeamCircles(label: UILabel) {

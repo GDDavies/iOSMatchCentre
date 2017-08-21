@@ -8,17 +8,11 @@
 
 import Foundation
 
-class StartingPlayer: NSObject {
+class Player: NSObject {
     var playerName: String?
     var playerNumber: Int?
     var playerPosition: String?
     var formationPlace: Int?
-    var isHomePlayer: Bool?
-}
-
-class BenchPlayer: NSObject {
-    var playerName: String?
-    var playerNumber: Int?
     var isHomePlayer: Bool?
 }
 
