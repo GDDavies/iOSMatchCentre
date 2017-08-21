@@ -92,7 +92,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="o3y-vL-gsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="o3y-vL-gsK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -603,28 +603,28 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90'" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C16-CL-KZR">
-                                                    <rect key="frame" x="150" y="11" width="25" height="21"/>
+                                                    <rect key="frame" x="140" y="11" width="35" height="21"/>
                                                     <fontDescription key="fontDescription" name="DroidSans" family="Droid Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GW-sg-Opt">
-                                                    <rect key="frame" x="226" y="6.5" width="141" height="31"/>
+                                                    <rect key="frame" x="238" y="6.5" width="129" height="31"/>
                                                     <fontDescription key="fontDescription" name="DroidSans" family="Droid Sans" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnX-Jp-Bd6">
-                                                    <rect key="frame" x="8" y="6.5" width="141" height="31"/>
+                                                    <rect key="frame" x="8" y="6.5" width="129" height="31"/>
                                                     <fontDescription key="fontDescription" name="DroidSans" family="Droid Sans" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90'" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42W-PN-Hvi">
-                                                    <rect key="frame" x="200" y="11" width="25" height="21"/>
+                                                    <rect key="frame" x="200" y="11" width="35" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="CkG-FD-OAc"/>
-                                                        <constraint firstAttribute="width" constant="25" id="vQM-g4-4Ce"/>
+                                                        <constraint firstAttribute="width" constant="35" id="vQM-g4-4Ce"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="DroidSans" family="Droid Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -643,8 +643,8 @@
                                                 <constraint firstItem="nnX-Jp-Bd6" firstAttribute="centerY" secondItem="dyS-sd-u3T" secondAttribute="centerY" id="NWD-ji-Bi5"/>
                                                 <constraint firstItem="C16-CL-KZR" firstAttribute="centerY" secondItem="dyS-sd-u3T" secondAttribute="centerY" id="O3g-Xo-JHK"/>
                                                 <constraint firstItem="C16-CL-KZR" firstAttribute="height" secondItem="42W-PN-Hvi" secondAttribute="height" id="PNc-Qm-Pys"/>
-                                                <constraint firstItem="6GW-sg-Opt" firstAttribute="leading" secondItem="42W-PN-Hvi" secondAttribute="trailing" constant="1" id="gLI-GA-a6U"/>
-                                                <constraint firstItem="C16-CL-KZR" firstAttribute="leading" secondItem="nnX-Jp-Bd6" secondAttribute="trailing" constant="1" id="iun-3F-YME"/>
+                                                <constraint firstItem="6GW-sg-Opt" firstAttribute="leading" secondItem="42W-PN-Hvi" secondAttribute="trailing" constant="3" id="gLI-GA-a6U"/>
+                                                <constraint firstItem="C16-CL-KZR" firstAttribute="leading" secondItem="nnX-Jp-Bd6" secondAttribute="trailing" constant="3" id="iun-3F-YME"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="6GW-sg-Opt" secondAttribute="trailing" id="kCh-Py-JLm"/>
                                                 <constraint firstItem="mUd-gI-pOq" firstAttribute="centerX" secondItem="dyS-sd-u3T" secondAttribute="centerX" id="m40-zs-Q2l"/>
                                                 <constraint firstItem="6GW-sg-Opt" firstAttribute="centerY" secondItem="dyS-sd-u3T" secondAttribute="centerY" id="rMz-Iu-hAb"/>

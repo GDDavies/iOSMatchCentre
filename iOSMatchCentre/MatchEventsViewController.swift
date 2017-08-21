@@ -16,6 +16,7 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(MatchEventsViewController.getMatchEventsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+        matchEventsTableView.layoutIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,75 +38,87 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
         matchEventsTableView.reloadData()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func resetConstraints(cell: EventTableViewCell) {
+        cell.dividerViewBottomConstraint.constant = -8.0
+        cell.dividerViewTopConstraint.constant = -8.0
     }
-    */
+    
+    func resetLabels(cell: EventTableViewCell,isHome: Bool) {
+        if isHome {
+            cell.homeEventDescription.isHidden = false
+            cell.homeEventTime.isHidden = false
+            cell.awayEventDescription.isHidden = true
+            cell.awayEventTime.isHidden = true
+        } else {
+            cell.homeEventDescription.isHidden = true
+            cell.homeEventTime.isHidden = true
+            cell.awayEventDescription.isHidden = false
+            cell.awayEventTime.isHidden = false
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(matchEventsArray.count)
         return matchEventsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MatchEventCell", for: indexPath) as! EventTableViewCell
         
-        if indexPath.row == 0 {
-            cell.eventImage.image = UIImage(named: "whistle.png")
-            cell.dividerViewTopConstraint.constant = cell.bounds.height / 2
-        } else if indexPath.row == matchEventsArray.count - 1 {
-            cell.eventImage.image = UIImage(named: "whistle.png")
-            cell.dividerViewBottomConstraint.constant = cell.bounds.height / 2
-        } else {
-            if let isHomeEvent = matchEventsArray[indexPath.row].isHome {
-                if isHomeEvent {
-                    cell.eventImage.image = UIImage(named: "\(String(describing: matchEventsArray[indexPath.row].type)).png")
-                    cell.homeEventTime.text = matchEventsArray[indexPath.row].when
-                    cell.homeEventDescription.text = matchEventsArray[indexPath.row].type
-                }
+        let event = String(describing: matchEventsArray[indexPath.row].type!)
+        let when = String(describing: matchEventsArray[indexPath.row].when!)
+        
+        switch event {
+        case event where event == "kickoff" || event == "halftime" || event == "fulltime":
+            cell.eventImage.image = UIImage(named: "\(event).png")
+            cell.homeEventDescription.isHidden = true
+            cell.homeEventTime.isHidden = true
+            cell.awayEventDescription.isHidden = true
+            cell.awayEventTime.isHidden = true
+            if event == "kickoff" {
+                cell.dividerViewTopConstraint.constant = cell.bounds.height / 2
+            } else if event == "fulltime" {
+                cell.dividerViewBottomConstraint.constant = cell.bounds.height / 2
+            } else {
+                resetConstraints(cell: cell)
             }
+        case "substitution":
+            cell.eventImage.image = UIImage(named: "\(event).png")
+            if matchEventsArray[indexPath.row].isHome! {
+                cell.homeEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off \n \(matchEventsArray[indexPath.row].subOn!) on"
+                cell.homeEventTime.text = when
+                resetLabels(cell: cell, isHome: true)
+            } else {
+                cell.awayEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off \n \(matchEventsArray[indexPath.row].subOn!) on"
+                cell.awayEventTime.text = when
+                resetLabels(cell: cell, isHome: false)
+            }
+            resetConstraints(cell: cell)
+        default:
+            cell.eventImage.image = UIImage(named: "\(event).png")
+            if matchEventsArray[indexPath.row].isHome! {
+                cell.homeEventDescription.text = "\(event.uppercaseFirst) - \(String(describing: matchEventsArray[indexPath.row].whom!))"
+                cell.homeEventTime.text = when
+                resetLabels(cell: cell, isHome: true)
+            } else {
+                cell.awayEventDescription.text = "\(event.uppercaseFirst) - \(String(describing: matchEventsArray[indexPath.row].whom!))"
+                cell.awayEventTime.text = when
+                resetLabels(cell: cell, isHome: false)
+            }
+            resetConstraints(cell: cell)
         }
-//        
-//        switch indexPath.row {
-//        case 0:
-//            cell.eventImage.image = UIImage(named: "goal.png")
-//            cell.homeEventTime.text = "90'"
-//            cell.homeEventDescription.text = "Goal! Billy Sharp"
-//            cell.awayEventTime.isHidden = true
-//            cell.awayEventDescription.isHidden = true
-//            cell.dividerViewTopConstraint.constant = cell.bounds.height / 2
-//        case 1:
-//            cell.eventImage.image = UIImage(named: "substitution.png")
-//            cell.awayEventTime.text = "80'"
-//            cell.awayEventDescription.text = "Substitution. Billy Sharp for Ched Evans"
-//            cell.homeEventTime.isHidden = true
-//            cell.homeEventDescription.isHidden = true
-//        case 2:
-//            cell.eventImage.image = UIImage(named: "whistle.png")
-//            cell.homeEventTime.text = "40'"
-//            cell.homeEventDescription.text = "Foul"
-//            cell.awayEventTime.isHidden = true
-//            cell.awayEventDescription.isHidden = true
-//        case 3:
-//            cell.eventImage.image = UIImage(named: "booking.png")
-//            cell.awayEventTime.text = "55'"
-//            cell.awayEventDescription.text = "Booking. Paddy Kenny"
-//            cell.homeEventTime.isHidden = true
-//            cell.homeEventDescription.isHidden = true
-//            cell.dividerViewBottomConstraint.constant = cell.bounds.height / 2
-//        default:
-//            cell.eventImage.image = UIImage(named: "goal.png")
-//        }
-        //cell.dividerView.layoutIfNeeded()
         return cell
+    }
+}
+
+extension String {
+    var first: String {
+        return String(characters.prefix(1))
+    }
+    var uppercaseFirst: String {
+        return first.uppercased() + String(characters.dropFirst())
     }
 }
