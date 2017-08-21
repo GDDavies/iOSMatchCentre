@@ -88,11 +88,11 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
         case "substitution":
             cell.eventImage.image = UIImage(named: "\(event).png")
             if matchEventsArray[indexPath.row].isHome! {
-                cell.homeEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off \n \(matchEventsArray[indexPath.row].subOn!) on"
+                cell.homeEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off \n\(matchEventsArray[indexPath.row].subOn!) on"
                 cell.homeEventTime.text = when
                 resetLabels(cell: cell, isHome: true)
             } else {
-                cell.awayEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off \n \(matchEventsArray[indexPath.row].subOn!) on"
+                cell.awayEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off\n\(matchEventsArray[indexPath.row].subOn!) on"
                 cell.awayEventTime.text = when
                 resetLabels(cell: cell, isHome: false)
             }
