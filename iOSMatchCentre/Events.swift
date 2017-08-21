@@ -19,7 +19,7 @@ class CommentaryEvent: NSObject {
 
 class MatchEvent: NSObject {
     var type: String?
-    var when: String?
+    var when: Int?
     var whom: String?
     var isHome: Bool?
     var subOn: String?

@@ -11,6 +11,7 @@ import UIKit
 class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var matchEventsArray = [MatchEvent]()
+    var fullTimeIndex: Int?
     @IBOutlet weak var matchEventsTableView: UITableView!
     
     override func viewDidLoad() {
@@ -25,16 +26,41 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func getMatchEventsData() {
-        for event in MatchJSONData.sharedInstance.matchEventsArray {
+        for (index, event) in MatchJSONData.sharedInstance.matchEventsArray.enumerated() {
             let newEvent = MatchEvent()
             newEvent.type = event?["type"] as? String
-            newEvent.when = event?["when"] as? String
+            if newEvent.type == "fulltime" {
+                fullTimeIndex = index
+            }
+            var timeString = event?["when"] as? String
+            
+            if timeString?.range(of: "+") != nil {
+            
+                let time = timeString?.components(separatedBy: "+")
+                let normalTime = Int(time![0])
+                var extraTimeString = time![1]
+                // Remove trailing apostrophe on the end and convert to Int
+                extraTimeString.remove(at: extraTimeString.index(before: extraTimeString.endIndex)) //String(describing: extraTimeString.characters.dropLast())
+                let extraTimeInt = Int(extraTimeString)
+                let sumOfTime = normalTime! + extraTimeInt!
+                newEvent.when = sumOfTime
+            } else {
+                // Remove trailing apostrophe
+                timeString?.remove(at: (timeString?.index(before: (timeString?.endIndex)!))!)
+                newEvent.when = Int(timeString!)
+            }
             newEvent.whom = event?["whom"] as? String
             newEvent.isHome = event?["isHome"] as? Bool
             newEvent.subOn = event?["subOn"] as? String
             newEvent.subOff = event?["subOff"] as? String
             matchEventsArray.append(newEvent)
         }
+        sortMatchEvents()
+    }
+    
+    
+    func sortMatchEvents() {
+        matchEventsArray.sort(by: { $1.when! > $0.when! })
         matchEventsTableView.reloadData()
     }
     
@@ -89,11 +115,11 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             cell.eventImage.image = UIImage(named: "\(event).png")
             if matchEventsArray[indexPath.row].isHome! {
                 cell.homeEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off \n\(matchEventsArray[indexPath.row].subOn!) on"
-                cell.homeEventTime.text = when
+                cell.homeEventTime.text = when + "'"
                 resetLabels(cell: cell, isHome: true)
             } else {
                 cell.awayEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off\n\(matchEventsArray[indexPath.row].subOn!) on"
-                cell.awayEventTime.text = when
+                cell.awayEventTime.text = when + "'"
                 resetLabels(cell: cell, isHome: false)
             }
             resetConstraints(cell: cell)
@@ -101,11 +127,11 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             cell.eventImage.image = UIImage(named: "\(event).png")
             if matchEventsArray[indexPath.row].isHome! {
                 cell.homeEventDescription.text = "\(event.uppercaseFirst) - \(String(describing: matchEventsArray[indexPath.row].whom!))"
-                cell.homeEventTime.text = when
+                cell.homeEventTime.text = when + "'"
                 resetLabels(cell: cell, isHome: true)
             } else {
                 cell.awayEventDescription.text = "\(event.uppercaseFirst) - \(String(describing: matchEventsArray[indexPath.row].whom!))"
-                cell.awayEventTime.text = when
+                cell.awayEventTime.text = when + "'"
                 resetLabels(cell: cell, isHome: false)
             }
             resetConstraints(cell: cell)
@@ -122,3 +148,4 @@ extension String {
         return first.uppercased() + String(characters.dropFirst())
     }
 }
+
