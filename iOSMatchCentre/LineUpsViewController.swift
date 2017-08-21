@@ -53,7 +53,7 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
             startingPlayers.append(newPlayer)
         }
         for i in numStartingPlayers..<awayTeam.count {
-            let newBenchPlayer = returnNewPlayer(player: homeTeam[i], isHome: false, index: i)
+            let newBenchPlayer = returnNewPlayer(player: awayTeam[i], isHome: false, index: i)
             benchPlayers.append(newBenchPlayer)
         }
         // Reload view once all JSON data is loaded
@@ -119,7 +119,6 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.awayPlayerNumberLabel.text = String(describing: startingPlayers[indexPath.row + 11].playerNumber!)
                 cell.awayPlayerNameLabel.text = startingPlayers[indexPath.row + 11].playerName
                 
-                
             } else {
                 // Substitute section
                 cell.homePlayerNameLabel.text = benchPlayers[indexPath.row].playerName
@@ -129,6 +128,7 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.awayPlayerNumberLabel.text = String(describing: benchPlayers[indexPath.row + (benchPlayers.count / 2)].playerNumber!)
             }
         }
+        cell.separatorInset = UIEdgeInsets.zero
         return cell
     }
     
