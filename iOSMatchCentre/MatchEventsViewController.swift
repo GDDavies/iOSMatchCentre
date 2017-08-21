@@ -36,19 +36,10 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             newEvent.subOn = event?["subOn"] as? String
             newEvent.subOff = event?["subOff"] as? String
             
+            // If event time contains a '+' then append to
+            // extraTimeEvents & extraTimeEventsIndex
             if newEvent.when?.range(of: "+") != nil {
                 extraTimeEventsIndex.append(index)
-//                let time = newEvent.when?.components(separatedBy: "+")
-//                let normalTime = Int(time![0])
-//                var extraTimeString = time![1]
-//                // Remove trailing apostrophe on the end and convert to Int
-//                extraTimeString.remove(at: extraTimeString.index(before: extraTimeString.endIndex)) //String(describing: extraTimeString.characters.dropLast())
-//                // Convert additional time (i.e. anything over 90 minutes) to integer
-//                let extraTimeInt = Int(extraTimeString)
-//                // Add the extra time to 90
-//                let sumOfTime = normalTime! + extraTimeInt!
-//                // Change when property to
-//                newEvent.when = String(describing: sumOfTime) + "'"
                 extraTimeEvents.append(newEvent)
             }
             matchEventsArray.append(newEvent)
@@ -57,7 +48,9 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func sortExtraTimeEvents() {
+        // Sort extra time events in to correct order
         extraTimeEvents.sort(by: { $1.when! > $0.when! })
+        // Replace original extra time events with sorted events
         for (index, event) in extraTimeEvents.enumerated() {
             matchEventsArray.remove(at: extraTimeEventsIndex[index])
             matchEventsArray.insert(event, at: extraTimeEventsIndex[index])
@@ -66,11 +59,12 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func resetConstraints(cell: EventTableViewCell) {
+        // Reset Kick Off and Fulltime divider constraints
         cell.dividerViewBottomConstraint.constant = -8.0
         cell.dividerViewTopConstraint.constant = -8.0
     }
     
-    func resetLabels(cell: EventTableViewCell,isHome: Bool) {
+    func setEventLabelVisibility(cell: EventTableViewCell,isHome: Bool) {
         if isHome {
             cell.homeEventDescription.isHidden = false
             cell.homeEventTime.isHidden = false
@@ -117,11 +111,11 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             if matchEventsArray[indexPath.row].isHome! {
                 cell.homeEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off \n\(matchEventsArray[indexPath.row].subOn!) on"
                 cell.homeEventTime.text = when
-                resetLabels(cell: cell, isHome: true)
+                setEventLabelVisibility(cell: cell, isHome: true)
             } else {
                 cell.awayEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off\n\(matchEventsArray[indexPath.row].subOn!) on"
                 cell.awayEventTime.text = when
-                resetLabels(cell: cell, isHome: false)
+                setEventLabelVisibility(cell: cell, isHome: false)
             }
             resetConstraints(cell: cell)
         default:
@@ -129,11 +123,11 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             if matchEventsArray[indexPath.row].isHome! {
                 cell.homeEventDescription.text = "\(event.uppercaseFirst) - \(String(describing: matchEventsArray[indexPath.row].whom!))"
                 cell.homeEventTime.text = when
-                resetLabels(cell: cell, isHome: true)
+                setEventLabelVisibility(cell: cell, isHome: true)
             } else {
                 cell.awayEventDescription.text = "\(event.uppercaseFirst) - \(String(describing: matchEventsArray[indexPath.row].whom!))"
                 cell.awayEventTime.text = when
-                resetLabels(cell: cell, isHome: false)
+                setEventLabelVisibility(cell: cell, isHome: false)
             }
             resetConstraints(cell: cell)
         }
