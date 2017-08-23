@@ -9,7 +9,7 @@
 //import Foundation
 import UIKit
 
-struct Theme{
+struct Theme {
     
     // Main team colours
     static var primaryTeamColour = UIColor(red: 39/255, green: 68/255, blue: 135/255, alpha: 1.0)
