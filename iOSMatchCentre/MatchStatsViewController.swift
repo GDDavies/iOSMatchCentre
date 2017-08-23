@@ -58,9 +58,7 @@ class MatchStatsViewController: UIViewController {
     }
     
     // MARK: - Setup Match Stats Data
-    
     func populateMatchStatsData() {
-        //competitionNameLabel.text = MatchJSONData.sharedInstance.competition
         venueLabel.text = MatchJSONData.sharedInstance.venue
         attendanceLabel.text = MatchJSONData.sharedInstance.attendance
         refereeLabel.text = MatchJSONData.sharedInstance.referee
@@ -74,13 +72,23 @@ class MatchStatsViewController: UIViewController {
     }
     
     func loadLogos() {
-        // WHAT IF WE DON'T HAVE THE IMAGE?
-        self.homeTeamLogo.image = UIImage(named: "\(String(describing: MatchJSONData.sharedInstance.homeTeamName!)).png")
-        self.awayTeamLogo.image = UIImage(named: "\(String(describing: MatchJSONData.sharedInstance.awayTeamName!)).png")
-        self.competitionImageView.image = UIImage(named: "\(String(describing: MatchJSONData.sharedInstance.competition!)).png")
+        
+        if let homeTeam = MatchJSONData.sharedInstance.homeTeamName {
+            if let homeLogo = UIImage(named: "\(String(describing: homeTeam)).png") {
+                self.homeTeamLogo.image = homeLogo
+            }
+        }
+        
+        if let awayTeam = MatchJSONData.sharedInstance.awayTeamName {
+            if let awayLogo = UIImage(named: "\(String(describing: awayTeam)).png") {
+                self.awayTeamLogo.image = awayLogo
+            }
+        }
+        
+        if let competition = MatchJSONData.sharedInstance.competition {
+            if let competitionLogo = UIImage(named: "\(String(describing: competition)).png") {
+                self.competitionImageView.image = competitionLogo
+            }
+        }
     }
-
-
-    // MARK: - Navigation
-
 }
