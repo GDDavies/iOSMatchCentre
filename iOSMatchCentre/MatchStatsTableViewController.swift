@@ -12,7 +12,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
 
     @IBOutlet weak var matchStatsTableView: UITableView!
     
-    let sectionHeaders = ["Half Time Score","Possession (%)","Shots","Shots on Target","Corners","Fouls","Yellow Cards","Red Cards"]
+    let screenHeight = UIScreen.main.bounds.height
     
     var homeTeamStatsArray = [Double]()
     var awayTeamStatsArray = [Double]()
@@ -70,11 +70,6 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         }
         return array
     }
-
-    /*
-    // MARK: - Navigation
-
-    */
     
     // Return width
     func createHomePercentage(homeInput: Double, awayInput: Double, index: Int) -> CGFloat {
@@ -97,7 +92,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
     
     // MARK: - TableView methods
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionHeaders.count
+        return 8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,26 +149,38 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
     
     // Set header heights
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 35.0
-        } else {
-            return 15.0
-        }
+        return screenHeight * 0.035
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return screenHeight * 0.05
     }
     
     // Custom section header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.width, height: 50)))
-        var y = -10
-        if section == 0 {
-            y = 8
-        }
-        let label = UILabel(frame: CGRect(x: 0, y: y, width: Int(self.view.frame.width), height: 20))
-        label.text = sectionHeaders[section]
-        label.font = UIFont(name: "DroidSans-Bold", size: 14.0)
-        label.textAlignment = .center
-        headerView.addSubview(label)
+        let headerCell = tableView.dequeueReusableCell(withIdentifier: "StatsHeaderCell") as! CustomStatsHeaderCell
         
-        return headerView
+        headerCell.backgroundColor = UIColor(red: 240/255, green: 239/255, blue: 245/255, alpha: 1)
+        switch section {
+        case 0:
+            headerCell.headerLabel.text =  "Half Time Score"
+        case 1:
+            headerCell.headerLabel.text = "Possession (%)"
+        case 2:
+            headerCell.headerLabel.text = "Shots"
+        case 3:
+            headerCell.headerLabel.text = "Shots on Target"
+        case 4:
+            headerCell.headerLabel.text = "Corners"
+        case 5:
+            headerCell.headerLabel.text = "Fouls"
+        case 6:
+            headerCell.headerLabel.text = "Yellow Cards"
+        case 7:
+            headerCell.headerLabel.text = "Red Cards"
+        default:
+            headerCell.headerLabel.text = ""
+        }
+        return headerCell
     }
 }

@@ -17,6 +17,8 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Notification when data is loaded
         NotificationCenter.default.addObserver(self, selector: #selector(MatchEventsViewController.getMatchEventsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
         matchEventsTableView.layoutIfNeeded()
     }
@@ -109,11 +111,12 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
         case "substitution":
             cell.eventImage.image = UIImage(named: "\(event).png")
             if matchEventsArray[indexPath.row].isHome! {
-                cell.homeEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off \n\(matchEventsArray[indexPath.row].subOn!) on"
+                
+                cell.homeEventDescription.text = "\(matchEventsArray[indexPath.row].subOn!) on\n\(matchEventsArray[indexPath.row].subOff!) off"
                 cell.homeEventTime.text = when
                 setEventLabelVisibility(cell: cell, isHome: true)
             } else {
-                cell.awayEventDescription.text = "\(matchEventsArray[indexPath.row].subOff!) off\n\(matchEventsArray[indexPath.row].subOn!) on"
+                cell.awayEventDescription.text = "\(matchEventsArray[indexPath.row].subOn!) on\n\(matchEventsArray[indexPath.row].subOff!) off"
                 cell.awayEventTime.text = when
                 setEventLabelVisibility(cell: cell, isHome: false)
             }

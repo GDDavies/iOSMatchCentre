@@ -64,10 +64,10 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let newPlayer = Player()
         newPlayer.playerName = player["name"] as? String
         newPlayer.playerNumber = player["number"] as? Int
-        if index < 11 {
-            newPlayer.playerPosition = player["position"] as? String
-            newPlayer.formationPlace = player["formationPlace"] as? Int
-        }
+//        if index < 11 {
+//            newPlayer.playerPosition = player["position"] as? String
+//            newPlayer.formationPlace = player["formationPlace"] as? Int
+//        }
         newPlayer.isHomePlayer = isHome
         return newPlayer
     }
@@ -97,28 +97,23 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
         // If there are players in the startingPlayers array
         if !startingPlayers.isEmpty {
             
-            let size: CGFloat = 20
+            let cornerRadius: CGFloat = 10
             
-            cell.homePlayerNumberLabel.layer.cornerRadius = size / 2
-            cell.homePlayerNumberLabel.layer.borderWidth = 2.0
-            cell.homePlayerNumberLabel.layer.borderColor = TeamColours.primaryColour["\(String(describing: MatchJSONData.sharedInstance.homeTeamName!))"]?.cgColor
-            cell.homePlayerNumberLabel.layer.backgroundColor = TeamColours.secondaryColour["\(String(describing: MatchJSONData.sharedInstance.homeTeamName!))"]?.cgColor
-            cell.homePlayerNumberLabel.textColor = TeamColours.primaryColour["\(String(describing: MatchJSONData.sharedInstance.homeTeamName!))"]
-            
-            cell.awayPlayerNumberLabel.layer.cornerRadius = size / 2
-            cell.awayPlayerNumberLabel.layer.borderWidth = 2.0
-            cell.awayPlayerNumberLabel.layer.borderColor = TeamColours.primaryColour["\(String(describing: MatchJSONData.sharedInstance.awayTeamName!))"]?.cgColor
-            cell.awayPlayerNumberLabel.layer.backgroundColor = TeamColours.secondaryColour["\(String(describing: MatchJSONData.sharedInstance.awayTeamName!))"]?.cgColor
-            cell.awayPlayerNumberLabel.textColor = TeamColours.primaryColour["\(String(describing: MatchJSONData.sharedInstance.awayTeamName!))"]
+            zip([cell.homePlayerNumberLabel, cell.awayPlayerNumberLabel],[MatchJSONData.sharedInstance.homeTeamName, MatchJSONData.sharedInstance.awayTeamName]).forEach {
+                $0.0?.layer.cornerRadius = cornerRadius
+                $0.0?.layer.borderWidth = 2.0
+                $0.0?.layer.borderColor = TeamColours.primaryColour["\(String(describing: $0.1!))"]?.cgColor
+                $0.0?.layer.backgroundColor = TeamColours.secondaryColour["\(String(describing: $0.1!))"]?.cgColor
+                $0.0?.textColor = TeamColours.primaryColour["\(String(describing: $0.1!))"]
+                }
             
             // Starting XI section
             if indexPath.section == 0 {
                 cell.homePlayerNameLabel.text = startingPlayers[indexPath.row].playerName
                 cell.homePlayerNumberLabel.text = String(describing: startingPlayers[indexPath.row].playerNumber!)
 
-                cell.awayPlayerNumberLabel.text = String(describing: startingPlayers[indexPath.row + 11].playerNumber!)
-                cell.awayPlayerNameLabel.text = startingPlayers[indexPath.row + 11].playerName
-                
+                cell.awayPlayerNameLabel.text = startingPlayers[indexPath.row + numStartingPlayers].playerName
+                cell.awayPlayerNumberLabel.text = String(describing: startingPlayers[indexPath.row + numStartingPlayers].playerNumber!)
             } else {
                 // Substitute section
                 cell.homePlayerNameLabel.text = benchPlayers[indexPath.row].playerName
@@ -128,6 +123,7 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.awayPlayerNumberLabel.text = String(describing: benchPlayers[indexPath.row + (benchPlayers.count / 2)].playerNumber!)
             }
         }
+        // Remove separator line edge inset
         cell.separatorInset = UIEdgeInsets.zero
         return cell
     }
@@ -163,6 +159,7 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
             y = 8
         }
         
+        // Section header label settings
         let label = UILabel(frame: CGRect(x: 0, y: y, width: Int(self.view.frame.width), height: 20))
         label.text = sectionHeaders[section]
         label.font = UIFont(name: "DroidSans-Bold", size: 14.0)

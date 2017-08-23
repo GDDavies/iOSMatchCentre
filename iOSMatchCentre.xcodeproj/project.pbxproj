@@ -24,6 +24,7 @@
 		93308AFE1F3DCE61004C2A38 /* MatchStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93308AFD1F3DCE61004C2A38 /* MatchStatsViewController.swift */; };
 		9356FDF41F421030000DB9AB /* JSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9356FDF31F421030000DB9AB /* JSONData.swift */; };
 		936F014D1F458A62009E6AF9 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936F014C1F458A62009E6AF9 /* Events.swift */; };
+		939019F81F4DA54B00099102 /* CustomStatsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939019F71F4DA54B00099102 /* CustomStatsHeaderCell.swift */; };
 		9396C65F1F444C9E0048765F /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9396C65E1F444C9E0048765F /* CustomSegmentedControl.swift */; };
 		93C980B61F4A1E6C00E99983 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C980B51F4A1E6C00E99983 /* Players.swift */; };
 		93D840551F48D3CB00E210FE /* MatchEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D840541F48D3CB00E210FE /* MatchEventsViewController.swift */; };
@@ -73,6 +74,7 @@
 		93308AFD1F3DCE61004C2A38 /* MatchStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchStatsViewController.swift; sourceTree = "<group>"; };
 		9356FDF31F421030000DB9AB /* JSONData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONData.swift; sourceTree = "<group>"; };
 		936F014C1F458A62009E6AF9 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		939019F71F4DA54B00099102 /* CustomStatsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomStatsHeaderCell.swift; sourceTree = "<group>"; };
 		9396C65E1F444C9E0048765F /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		93C980B51F4A1E6C00E99983 /* Players.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
 		93D840541F48D3CB00E210FE /* MatchEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchEventsViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				9326AD2B1F3E63E9005B0764 /* MatchStatsTableViewCell.swift */,
 				93D840561F48D64D00E210FE /* EventTableViewCell.swift */,
 				9396C65E1F444C9E0048765F /* CustomSegmentedControl.swift */,
+				939019F71F4DA54B00099102 /* CustomStatsHeaderCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				9356FDF41F421030000DB9AB /* JSONData.swift in Sources */,
 				9326EB331F3F823E003F9FBA /* LineUpsTableViewCell.swift in Sources */,
 				9313BD841F3D0F2900CCD341 /* CommentaryViewController.swift in Sources */,
+				939019F81F4DA54B00099102 /* CustomStatsHeaderCell.swift in Sources */,
 				9326AD2C1F3E63E9005B0764 /* MatchStatsTableViewCell.swift in Sources */,
 				9326AD2A1F3E621C005B0764 /* MatchStatsTableViewController.swift in Sources */,
 				936F014D1F458A62009E6AF9 /* Events.swift in Sources */,
