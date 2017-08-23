@@ -19,7 +19,7 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         // Notification when data is loaded
-        NotificationCenter.default.addObserver(self, selector: #selector(MatchEventsViewController.getMatchEventsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getMatchEventsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
         matchEventsTableView.layoutIfNeeded()
     }
 
@@ -60,25 +60,7 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
         matchEventsTableView.reloadData()
     }
     
-    func resetConstraints(cell: EventTableViewCell) {
-        // Reset Kick Off and Fulltime divider constraints
-        cell.dividerViewBottomConstraint.constant = -8.0
-        cell.dividerViewTopConstraint.constant = -8.0
-    }
-    
-    func setEventLabelVisibility(cell: EventTableViewCell,isHome: Bool) {
-        if isHome {
-            cell.homeEventDescription.isHidden = false
-            cell.homeEventTime.isHidden = false
-            cell.awayEventDescription.isHidden = true
-            cell.awayEventTime.isHidden = true
-        } else {
-            cell.homeEventDescription.isHidden = true
-            cell.homeEventTime.isHidden = true
-            cell.awayEventDescription.isHidden = false
-            cell.awayEventTime.isHidden = false
-        }
-    }
+    // MARK:- Table View Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -90,7 +72,13 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MatchEventCell", for: indexPath) as! EventTableViewCell
-        
+        formatCell(cell: cell, indexPath: indexPath)
+        return cell
+    }
+    
+    // Table View Cell methods
+    
+    func formatCell(cell: EventTableViewCell, indexPath: IndexPath) {
         let event = String(describing: matchEventsArray[indexPath.row].type!)
         let when = String(describing: matchEventsArray[indexPath.row].when!)
         
@@ -134,10 +122,30 @@ class MatchEventsViewController: UIViewController, UITableViewDelegate, UITableV
             }
             resetConstraints(cell: cell)
         }
-        return cell
+    }
+    
+    func resetConstraints(cell: EventTableViewCell) {
+        // Reset Kick Off and Fulltime divider constraints
+        cell.dividerViewBottomConstraint.constant = -8.0
+        cell.dividerViewTopConstraint.constant = -8.0
+    }
+    
+    func setEventLabelVisibility(cell: EventTableViewCell, isHome: Bool) {
+        if isHome {
+            cell.homeEventDescription.isHidden = false
+            cell.homeEventTime.isHidden = false
+            cell.awayEventDescription.isHidden = true
+            cell.awayEventTime.isHidden = true
+        } else {
+            cell.homeEventDescription.isHidden = true
+            cell.homeEventTime.isHidden = true
+            cell.awayEventDescription.isHidden = false
+            cell.awayEventTime.isHidden = false
+        }
     }
 }
 
+// Change first letter of event to uppercase to be used in event label
 extension String {
     var first: String {
         return String(characters.prefix(1))

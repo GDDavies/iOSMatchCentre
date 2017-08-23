@@ -23,7 +23,7 @@ class CommentaryViewController: UIViewController, UITableViewDataSource, UITable
         tableView.estimatedRowHeight = 100
         
         // Notification observer for when json data is successfully loaded
-        NotificationCenter.default.addObserver(self, selector: #selector(CommentaryViewController.populateData), name: NSNotification.Name(rawValue: commentaryDataNCKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(populateData), name: NSNotification.Name(rawValue: commentaryDataNCKey), object: nil)
         
         // Refresh control to update data
         refreshControl = UIRefreshControl()

@@ -19,7 +19,7 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsTableViewController.populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
         matchStatsTableView.layoutIfNeeded()
     }
 

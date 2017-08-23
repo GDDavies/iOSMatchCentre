@@ -66,7 +66,6 @@ class CustomSegmentedControl: UIControl {
         let selectorWidth = UIScreen.main.bounds.width / CGFloat(buttons.count)
         let selectorHeight = UIScreen.main.bounds.height * 0.07
         selector = UIView(frame: CGRect(x: 0.0, y: 0.0, width: selectorWidth, height: selectorHeight))
-        //selector.layer.cornerRadius = frame.height / 2
         selector.backgroundColor = Theme.secondaryTeamColour
         addSubview(selector)
         
@@ -76,17 +75,14 @@ class CustomSegmentedControl: UIControl {
         stackView.distribution = .fillEqually
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add constraints
         stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         stackView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         stackView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
 
-    override func draw(_ rect: CGRect) {
-        //layer.cornerRadius = frame.height/2
-        
-    }
-    
     func buttonTapped(button: UIButton) {
         for (buttonIndex, btn) in buttons.enumerated() {
             btn.setTitleColor(newTextColour, for: .normal)

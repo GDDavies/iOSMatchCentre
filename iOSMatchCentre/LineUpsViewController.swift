@@ -20,7 +20,7 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Add notification observer for when JSON data is loaded successfully
-        NotificationCenter.default.addObserver(self, selector: #selector(LineUpsViewController.lineUpMatchData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(lineUpMatchData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
         lineUpTableView.rowHeight = UITableViewAutomaticDimension
     }
 
@@ -31,6 +31,9 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // Parse lineups from JSON and convert to array of player objects
     func lineUpMatchData() {
+        
+        
+        
         // Get home team player array
         let homeTeam = MatchJSONData.sharedInstance.homeTeamPlayers
         // Loop through array for first 11 players
@@ -40,6 +43,13 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
             // Append newPlayer to array
             startingPlayers.append(newPlayer)
         }
+        
+        let awayTeam = MatchJSONData.sharedInstance.awayTeamPlayers
+        for i in 0..<numStartingPlayers {
+            let newPlayer = returnNewPlayer(player: awayTeam[i], isHome: false, index: i)
+            startingPlayers.append(newPlayer)
+        }
+        
         // Loop through array for remaining players
         for i in numStartingPlayers..<homeTeam.count {
             // Create newBenchPlayer object using dictionary values
@@ -47,11 +57,7 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
             // Append newBenchPlayer to array
             benchPlayers.append(newBenchPlayer)
         }
-        let awayTeam = MatchJSONData.sharedInstance.awayTeamPlayers
-        for i in 0..<numStartingPlayers {
-            let newPlayer = returnNewPlayer(player: awayTeam[i], isHome: false, index: i)
-            startingPlayers.append(newPlayer)
-        }
+
         for i in numStartingPlayers..<awayTeam.count {
             let newBenchPlayer = returnNewPlayer(player: awayTeam[i], isHome: false, index: i)
             benchPlayers.append(newBenchPlayer)
@@ -64,19 +70,25 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let newPlayer = Player()
         newPlayer.playerName = player["name"] as? String
         newPlayer.playerNumber = player["number"] as? Int
-//        if index < 11 {
-//            newPlayer.playerPosition = player["position"] as? String
-//            newPlayer.formationPlace = player["formationPlace"] as? Int
-//        }
         newPlayer.isHomePlayer = isHome
         return newPlayer
     }
     
-    func lineUpTeamCircles(label: UILabel) {
-        
+    func lineUpTeamCircles(cell: LineUpsTableViewCell) {
+        zip([cell.homePlayerNumberLabel, cell.awayPlayerNumberLabel],[MatchJSONData.sharedInstance.homeTeamName, MatchJSONData.sharedInstance.awayTeamName]).forEach {
+            if let teamName = $0.1 {
+                // Apply circle with team colours if team name exists
+                let cornerRadius: CGFloat = 10
+                $0.0?.layer.cornerRadius = cornerRadius
+                $0.0?.layer.borderWidth = 2.0
+                $0.0?.layer.borderColor = TeamColours.primaryColour["\(String(describing: teamName))"]?.cgColor
+                $0.0?.layer.backgroundColor = TeamColours.secondaryColour["\(String(describing: teamName))"]?.cgColor
+                $0.0?.textColor = TeamColours.primaryColour["\(String(describing: teamName))"]
+            }
+        }
     }
     
-    // Two sections, one for starting XI and one for subs
+    // One section for starting XI and one for subs
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -97,15 +109,7 @@ class LineUpsViewController: UIViewController, UITableViewDelegate, UITableViewD
         // If there are players in the startingPlayers array
         if !startingPlayers.isEmpty {
             
-            let cornerRadius: CGFloat = 10
-            
-            zip([cell.homePlayerNumberLabel, cell.awayPlayerNumberLabel],[MatchJSONData.sharedInstance.homeTeamName, MatchJSONData.sharedInstance.awayTeamName]).forEach {
-                $0.0?.layer.cornerRadius = cornerRadius
-                $0.0?.layer.borderWidth = 2.0
-                $0.0?.layer.borderColor = TeamColours.primaryColour["\(String(describing: $0.1!))"]?.cgColor
-                $0.0?.layer.backgroundColor = TeamColours.secondaryColour["\(String(describing: $0.1!))"]?.cgColor
-                $0.0?.textColor = TeamColours.primaryColour["\(String(describing: $0.1!))"]
-                }
+            lineUpTeamCircles(cell: cell)
             
             // Starting XI section
             if indexPath.section == 0 {

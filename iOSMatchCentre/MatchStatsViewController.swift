@@ -44,7 +44,7 @@ class MatchStatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(containerViewA)
-        NotificationCenter.default.addObserver(self, selector: #selector(MatchStatsViewController.populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(populateMatchStatsData), name: NSNotification.Name(rawValue: matchDataNCKey), object: nil)
         
         customSegment.buttonTitles = ["Stats","Line Ups","Events"]
         customSegment.backgroundColor = Theme.primaryTeamColour
