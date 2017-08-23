@@ -102,47 +102,22 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MatchStatsCell", for: indexPath) as! MatchStatsTableViewCell
         
-        // Away team colour
+        // Away team colour for background of main bar view
         if let awayName = MatchJSONData.sharedInstance.awayTeamName {
             cell.awayStatsView.backgroundColor = TeamColours.primaryColour["\(String(describing: awayName))"]
         }
-        
+
         if !homeTeamStatsArray.isEmpty {
-                
-            let homeStatsShapeLayer = CAShapeLayer()
-            cell.awayStatsView.layer.cornerRadius = cell.awayStatsView.frame.height / 2
-            let awayStatsBounds = cell.awayStatsView.bounds
+            
+            manageStatsBarViews(cell: cell, indexPath: indexPath)
             
             // Remove decimal points from stats
             let formatter = NumberFormatter()
             formatter.minimumFractionDigits = 0
             formatter.maximumFractionDigits = 0
             
-            let homeStatsWidth = createHomePercentage(homeInput: homeTeamStatsArray[indexPath.section], awayInput: awayTeamStatsArray[indexPath.section], index: indexPath.section)
-        
-            homeStatsShapeLayer.frame = CGRect(x: awayStatsBounds.origin.x, y: awayStatsBounds.origin.y, width: awayStatsBounds.width * homeStatsWidth, height: awayStatsBounds.height)
-            
             cell.homeStatLabel.text = formatter.string(from: NSNumber(value: homeTeamStatsArray[indexPath.section]))
             cell.awayStatLabel.text = formatter.string(from: NSNumber(value: awayTeamStatsArray[indexPath.section]))
-            
-            // Home team colour
-            if let homeName = MatchJSONData.sharedInstance.homeTeamName {
-                homeStatsShapeLayer.fillColor = TeamColours.primaryColour["\(String(describing: homeName))"]?.cgColor
-                if awayTeamStatsArray[indexPath.section] != 0 || awayTeamStatsArray[indexPath.section] == homeTeamStatsArray[indexPath.section] {
-                    // Rounded corners on left side of stats bars
-                    homeStatsShapeLayer.path = UIBezierPath(roundedRect: homeStatsShapeLayer.bounds, byRoundingCorners: [UIRectCorner.topLeft , UIRectCorner.bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0)).cgPath
-                } else {
-                    // Rounded corners on both sides of stats bars
-                    homeStatsShapeLayer.path = UIBezierPath(roundedRect: homeStatsShapeLayer.bounds, cornerRadius: cell.awayStatsView.frame.height / 2).cgPath
-                }
-                homeStatsShapeLayer.cornerRadius = cell.awayStatsView.frame.height / 2
-            }
-            
-            // Remove away stats view sublayer if present
-            if cell.awayStatsView.layer.sublayers?.count == 1 {
-                cell.awayStatsView.layer.sublayers!.remove(at: 0)
-            }
-            cell.awayStatsView.layer.insertSublayer(homeStatsShapeLayer, at: 0)
         }
         return cell
     }
@@ -154,6 +129,36 @@ class MatchStatsTableViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return screenHeight * 0.05
+    }
+    
+    func manageStatsBarViews(cell: MatchStatsTableViewCell, indexPath: IndexPath) {
+        
+        let homeStatsShapeLayer = CAShapeLayer()
+        cell.awayStatsView.layer.cornerRadius = cell.awayStatsView.frame.height / 2
+        let awayStatsBounds = cell.awayStatsView.bounds
+        
+        let homeStatsWidth = createHomePercentage(homeInput: homeTeamStatsArray[indexPath.section], awayInput: awayTeamStatsArray[indexPath.section], index: indexPath.section)
+        
+        homeStatsShapeLayer.frame = CGRect(x: awayStatsBounds.origin.x, y: awayStatsBounds.origin.y, width: awayStatsBounds.width * homeStatsWidth, height: awayStatsBounds.height)
+        
+        // Home team colour for percentage bar on top of main bar view
+        if let homeName = MatchJSONData.sharedInstance.homeTeamName {
+            homeStatsShapeLayer.fillColor = TeamColours.primaryColour["\(String(describing: homeName))"]?.cgColor
+            if awayTeamStatsArray[indexPath.section] != 0 || awayTeamStatsArray[indexPath.section] == homeTeamStatsArray[indexPath.section] {
+                // Rounded corners on left side of stats bars
+                homeStatsShapeLayer.path = UIBezierPath(roundedRect: homeStatsShapeLayer.bounds, byRoundingCorners: [UIRectCorner.topLeft , UIRectCorner.bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0)).cgPath
+            } else {
+                // Rounded corners on both sides of stats bars
+                homeStatsShapeLayer.path = UIBezierPath(roundedRect: homeStatsShapeLayer.bounds, cornerRadius: cell.awayStatsView.frame.height / 2).cgPath
+            }
+            homeStatsShapeLayer.cornerRadius = cell.awayStatsView.frame.height / 2
+        }
+        
+        // Remove away stats view sublayer if present
+        if cell.awayStatsView.layer.sublayers?.count == 1 {
+            cell.awayStatsView.layer.sublayers!.remove(at: 0)
+        }
+        cell.awayStatsView.layer.insertSublayer(homeStatsShapeLayer, at: 0)
     }
     
     // Custom section header
